@@ -1,8 +1,8 @@
-# Development map
+# Development
 
-[Documentation home](../README.md) · [Capability inventory](inventory.md)
+[Documentation](../README.md)
 
-## Repository responsibilities
+## Repositories and modules
 
 ```mermaid
 flowchart TB
@@ -14,47 +14,53 @@ flowchart TB
     C --> UI[Embedded browser modules and locales]
 ```
 
-The docs repository owns explanations spanning projects. Technical specifications and
-implementation instructions remain with their code. Update the cross-project map when
-behavior changes; do not create a second independent copy of every protocol field.
+Cross-project architecture and deployment guides live in this repository. Wire formats,
+API contracts and build instructions are maintained alongside their implementations.
 
-## Firmware code map
+### Firmware
 
-| Location | Purpose |
+| Location | Responsibility |
 | --- | --- |
-| `lib/CajuiProtocol` | Wire encoding, authenticated frames, sender/receiver decisions |
-| `lib/CajuiRuntime` | Nonblocking send cycle, injected radio/clock/jitter interfaces |
+| `lib/CajuiProtocol` | Wire encoding, authenticated frames and delivery decisions |
+| `lib/CajuiRuntime` | Nonblocking send cycle and radio, clock and jitter interfaces |
 | `lib/CajuiApplication` | Receiver application logic and measurement normalization |
 | `lib/CajuiStorage` | Durable records, queue, counters, migrations and NVS adapter |
-| `lib/CajuiProvisioning`, `tools/` | USB administration and enrollment tooling |
-| `lib/CajuiPairing` | Radio pairing exchange and state machines |
-| `lib/CajuiSensors` | SHT4x driver in PR #25 |
+| `lib/CajuiProvisioning`, `tools/` | USB administration and enrollment |
+| `lib/CajuiPairing` | Radio pairing frames and state machines |
+| `lib/CajuiSensors` | SHT4x driver in the development firmware |
 | `lib/CajuiUplink` | MQTT formatting, forwarding, management and Discovery |
 | `lib/CajuiSetup` | Setup rendering, validation and recovery decisions |
 | `lib/CajuiDevice` | Boot mode, power and fault-retry decisions |
 | `lib/CajuiFirmware` | Signed-update verification |
-| `src/board`, role entry points | Hardware and runtime integration |
+| `src/board` and role entry points | ESP32 adapters and application integration |
 
-Source: [firmware tree](https://github.com/cajui/cajui-firmware/tree/a2ce332b2e3ff704f8e35032381786497c287968) and [module boundaries](https://github.com/cajui/cajui-firmware/tree/a2ce332b2e3ff704f8e35032381786497c287968/docs/runtime.md).
+The portable core separates protocol decisions from board-specific drivers. See the
+[firmware module contract](https://github.com/cajui/cajui-firmware/blob/a2ce332b2e3ff704f8e35032381786497c287968/docs/runtime.md) for interfaces and lifetime requirements.
 
-## Central code map
+### Central
 
-Start from [the repository README](https://github.com/cajui/cajui-central/blob/76a9a189d9a8101bc74b07f6723f9541f9acb05d/README.md). `cmd/cajui` wires the server;
-`internal/storage` owns SQLite, `internal/mqttingest` consumes broker traffic, and
-`internal/httpapi` provides APIs and embedded UI assets. Locale sources live under
-`locales`; browser tests live under `tests/ui`. Brand reference documentation is
-separate from the running monitoring interface.
+`cmd/cajui` wires the server. `internal/storage` owns SQLite persistence,
+`internal/mqttingest` handles subscriptions and ingestion, and `internal/httpapi` serves
+APIs and the embedded interface. Locale sources live under `locales`, and browser tests
+under `tests/ui`. Brand and component references are maintained separately under `docs/brand`.
 
-## What validation proves
+See [Central development instructions](https://github.com/cajui/cajui-central/blob/76a9a189d9a8101bc74b07f6723f9541f9acb05d/README.md) for build and test commands.
 
-Firmware uses Unity host tests, failure-injection storage doubles, Python tooling tests,
-coverage gates, lint, fuzzing and ESP32 compilation. Compilation does not run the tests
-on a board or establish RF reliability, current draw or ingress protection.
+## Testing
 
-Central uses Go tests/race checks, broker integration tests and browser tests. Home
-Assistant template checks are not a full HA installation test. Keep these distinctions
-in release notes and feature status.
+Firmware validation includes Unity host tests, failure-injection storage doubles,
+Python tooling tests, coverage gates, static analysis, fuzzing and ESP32 compilation.
+Hardware testing covers separate concerns such as radio timing, interference, power
+consumption and physical storage behavior.
 
-See [firmware testing](https://github.com/cajui/cajui-firmware/tree/a2ce332b2e3ff704f8e35032381786497c287968/docs/testing.md) and
-[Central development checks](https://github.com/cajui/cajui-central/blob/76a9a189d9a8101bc74b07f6723f9541f9acb05d/README.md). Avoid timeless coverage percentages
-in guides; test results belong to a particular revision and run.
+Central validation includes Go tests, race detection, MQTT integration tests and browser
+tests. Home Assistant template tests verify configuration output without running a full
+Home Assistant instance.
+
+Test results and coverage apply to the revision and environment in which they were
+measured. See [firmware testing](https://github.com/cajui/cajui-firmware/blob/a2ce332b2e3ff704f8e35032381786497c287968/docs/testing.md) and [version coverage](status.md).
+
+## Documentation contributions
+
+Edit Markdown and Mermaid sources directly. Run `python3 scripts/check_docs.py` and
+preview affected diagrams before submitting changes. See [CONTRIBUTING.md](../CONTRIBUTING.md).

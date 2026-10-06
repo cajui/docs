@@ -1,50 +1,57 @@
-# Operations and diagnosis
+# Operations and troubleshooting
 
-[Documentation home](../README.md) · [Setup](setup.md)
+[Documentation](../README.md)
 
-Work along the [measurement path](data-flow.md). A success at one boundary is not proof
-that later boundaries succeeded. Do not erase storage as the first troubleshooting step.
+## Troubleshooting
 
-| Symptom | Inspect first | Interpretation / next check |
+Trace a failing sample through sensor acquisition, radio delivery, MQTT forwarding and
+application ingestion. Check each stage's status before changing configuration.
+
+| Symptom | Checks | Relevant behavior |
 | --- | --- | --- |
-| No USB response | Data-capable cable, port and stable device ID | A charging cable or changed port is not lost enrollment |
-| Sensor error but radio ACK succeeds | Sensor power, pin mapping and driver | Radio delivery can work while sensing fails |
-| No radio ACK | Antennas, matching profile, enrollment, device/storage faults | Wi-Fi/MQTT is not required to durably accept a radio sample |
-| Receiver says Wi-Fi connected, Central offline | Broker address, credentials, ACLs and subscriptions | Wi-Fi connection alone does not reach the application |
-| Broker search returns nothing | Host mDNS announcement and multicast reachability | Enter a reachable address manually; search is optional |
-| Queue grows | Broker reachability and matching PUBACKs | Capacity is finite; inspect dropped-sample count |
-| Queue drains but no downstream readings | ACLs, topic identity, consumer connection and validation logs | MQTT 3.1.1 can acknowledge denied publications |
-| Receiver stays online briefly after unplugging | MQTT keepalive/Last Will | The UI cannot detect physical loss before evidence arrives |
-| Connected receiver, stale transmitter | Last unique sample and expected interval | Sleeping transmitters have no continuous online connection |
-| New arrivals have suspiciously old conditions | Backlog and arrival-time semantics | Forwarded time is not measurement time |
-| HA has no entities | Discovery ACL, prefix, username and supported metrics | Telemetry may work even when Discovery is disabled |
-| Removed item returns | New telemetry or live state | List removal does not block producers |
+| No USB response | Data cable, port, stable device ID | Serial ports can change after reconnecting |
+| Sensor error with successful radio ACK | Sensor power, wiring and driver | Measurement quality is independent of radio delivery |
+| No radio ACK | Antennas, profile, enrollment and storage health | Receiver acceptance can operate while MQTT is unavailable |
+| Wi-Fi connected but application receives nothing | Broker address, credentials, ACLs and subscriptions | Wi-Fi and MQTT have separate connection states |
+| Broker search returns no results | mDNS announcement and multicast reachability | Manual address entry is supported |
+| Receiver queue grows | Broker connection and PUBACK processing | The queue is bounded; inspect dropped-sample counters |
+| Queue drains without consumer readings | Topic permissions, identity and consumer logs | MQTT 3.1.1 can acknowledge denied publications |
+| Offline status is delayed after power loss | MQTT keepalive and Last Will | Offline detection follows the broker's timeout |
+| Receiver connected but transmitter stale | Last unique sample and reporting interval | Sleeping transmitters are monitored through sample arrivals |
+| New arrivals contain old conditions | Queued backlog and timestamps | Arrival time includes forwarding delay |
+| HA entities are absent | Discovery permissions, prefix, source ID and metric support | Discovery and telemetry use separate topics |
+| Removed items reappear | New samples or live device state | List removal preserves producer access |
 
-## Keep three kinds of information separate
+## Diagnostics
 
-1. **Measurements:** environmental and diagnostic readings saved as history.
-2. **Device state:** latest queue, uptime, firmware, pairing and availability.
-3. **Logs/diagnostic buffer:** temporary explanations of what the software did.
+Measurement history records readings over time. Device state records the latest queue,
+uptime, firmware and availability values. Logs and the MQTT diagnostic buffer describe
+recent processing events.
 
-Record which one supports a diagnosis. An old RSSI value displayed next to an offline
-badge is not proof the receiver is currently connected.
+Check timestamps when interpreting diagnostics. An offline receiver's last-known Wi-Fi
+signal or forwarding count may remain visible after its connection is lost.
 
-## Updates and recovery
+## Updates
 
-Back up the Central database before schema upgrades. Preserve firmware enrollment,
-cryptographic counters and queued samples during normal updates. A new-board install
-is destructive to existing enrollment, unlike an update preserving the dedicated partition.
+Back up the Central database before schema upgrades. Database schema downgrade is not
+supported; rolling back may require the older binary and its corresponding backup.
 
-The receiver accepts signed local update packages through its setup page, with two
-application slots and rollback behavior described by the firmware project. This is not
-a Central-managed download service or an over-LoRa transmitter updater. Stick Lite is
-not part of the signed/web release pipeline in the reviewed snapshot.
+Firmware updates must preserve enrollment and counter state. The receiver accepts signed
+update packages uploaded through its setup page and uses two application slots with
+rollback handling. Transmitters are updated over USB. The Stick Lite target is currently
+excluded from the signed/web release pipeline.
 
-For physical validation, independently check: fresh measurement delivery; an ordinary
-restart preserving enrollment; consumer reconnection; Wi-Fi-only persistence in the new
-firmware; and a read-only portal visit without MQTT reconnect. Some of these behaviors
-have automated coverage but still have pending hardware validation. Log observations,
-not inferred guarantees. Do not interrupt flash writes merely to claim a power-loss test.
+Follow [firmware update instructions](https://github.com/cajui/cajui-firmware/blob/a2ce332b2e3ff704f8e35032381786497c287968/docs/updates.md) for image compatibility,
+partition layout and recovery procedures. A new-board installation initializes enrollment
+storage and must not be used as a routine update.
 
-Sources: [radio diagnostics](https://github.com/cajui/cajui-firmware/blob/a2ce332b2e3ff704f8e35032381786497c287968/docs/radio-applications.md),
-[updates](https://github.com/cajui/cajui-firmware/blob/a2ce332b2e3ff704f8e35032381786497c287968/docs/updates.md), [Central operations](https://github.com/cajui/cajui-central/blob/76a9a189d9a8101bc74b07f6723f9541f9acb05d/README.md).
+## Recovery verification
+
+After configuration or firmware changes, verify saved settings after restart, enrollment,
+fresh sample delivery, receiver queue progress and application reconnection. Reopening
+and closing setup should preserve an established MQTT connection on firmware supporting
+the updated recovery behavior.
+
+Automated coverage and outstanding physical checks are documented in [project status](status.md).
+For detailed log fields, see [radio applications](https://github.com/cajui/cajui-firmware/blob/a2ce332b2e3ff704f8e35032381786497c287968/docs/radio-applications.md) and
+[Central operations](https://github.com/cajui/cajui-central/blob/76a9a189d9a8101bc74b07f6723f9541f9acb05d/README.md).

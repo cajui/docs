@@ -1,62 +1,75 @@
 # MQTT and integrations
 
-[Documentation home](../README.md) · [Measurement journey](data-flow.md)
+[Documentation](../README.md)
 
-The broker routes messages between clients. It is a service, not a Cajuí radio board.
-The receiver is a publisher and a management-command subscriber. Central and Home
-Assistant are consumers with different responsibilities and accounts.
+The MQTT broker connects receivers to monitoring applications. Receivers publish
+telemetry, device state and Home Assistant entity definitions. Authorized clients can
+request supported administrative actions through the management channel.
 
-## Message families
+## Topics
 
-| Family | Topic pattern | Purpose | Retained? |
+| Family | Topic pattern | Purpose | Retained |
 | --- | --- | --- | --- |
-| Telemetry | `telemetry/v1/<source>/<node>/samples` | Environmental and diagnostic readings | No |
-| Availability | `manage/v1/<source>/<device>/availability` | Receiver online/offline | Yes |
+| Telemetry | `telemetry/v1/<source>/<node>/samples` | Sensor and diagnostic readings | No |
+| Availability | `manage/v1/<source>/<device>/availability` | Receiver online/offline status | Yes |
 | State | `manage/v1/<source>/<device>/state` | Queue, firmware, pairing and node state | Yes |
-| Commands | `manage/v1/<source>/<device>/commands` | Supported administrative actions | No |
-| Results | `manage/v1/<source>/<device>/results` | Outcome of requested action | No |
-| HA Discovery | `homeassistant/sensor/<source>/<object>/config` | Entity definitions for Home Assistant | Yes |
+| Commands | `manage/v1/<source>/<device>/commands` | Administrative requests | No |
+| Results | `manage/v1/<source>/<device>/results` | Command outcomes | No |
+| HA Discovery | `homeassistant/sensor/<source>/<object>/config` | Entity definitions | Yes |
 
-Here `source` is the receiver's MQTT username, not its display name. Use the exact
-identity restrictions in the linked contracts; the allowed character sets for telemetry
-and HA Discovery differ. A username with a dot can work for telemetry while disabling
-HA Discovery in the current firmware.
+`source` is the receiver's MQTT username. Identifiers must satisfy the restrictions of
+each contract. In particular, the current Home Assistant integration requires a source
+containing only letters, digits, underscores and hyphens. A username containing a dot
+can publish telemetry but disables Discovery publication.
 
-## Three different kinds of discovery
+## Broker discovery
 
-- **Broker discovery (mDNS):** receiver finds an advertised MQTT address on the local network.
-  It still needs credentials. The host announcement must actually run, and multicast
-  must be reachable; Docker Desktop does not automatically advertise that service to the LAN.
-- **Radio pairing discovery:** receiver lists transmitters asking to join during an authorized window.
-  Finding a candidate is not approving it.
-- **Home Assistant MQTT Discovery:** receiver publishes definitions of supported entities
-  so HA knows their measurements, units and availability topics.
+The receiver can search the local network for an mDNS `_mqtt._tcp` announcement.
+Discovery supplies the broker address and port; authentication requires separately
+configured credentials.
 
-## Home Assistant without Central
+The broker host must advertise the service on a network reachable by the receiver.
+On Docker Desktop, run the project's announcement helper on the host because container
+multicast is not automatically exposed to the LAN. Manual address entry is available
+when multicast discovery is unavailable.
 
-Use a broker reachable by the receiver and Home Assistant. Give the receiver permissions
-for its telemetry, management and Discovery namespaces; give HA the required subscriptions.
-Enable HA's MQTT integration with the default `homeassistant` Discovery prefix.
-The receiver then announces supported entities; Central is not in the path.
+## Home Assistant
 
-Current entities include temperature/humidity and diagnostic radio, battery and receiver
-state where available. This is a registry of supported metrics, not universal recognition
-of every I2C sensor. The implementation and template outputs have been checked, but the
-referenced firmware documentation does not claim validation against a running HA installation.
+Configure the receiver and Home Assistant to use a reachable broker, then enable Home
+Assistant's MQTT integration with the default `homeassistant` Discovery prefix.
+The receiver publishes retained entity definitions for supported metrics. Central is
+optional and can run alongside Home Assistant.
 
-## Permissions and persistence
+Supported entities include temperature, humidity, radio diagnostics, battery voltage
+and receiver diagnostics where available. Entity availability follows receiver status
+and measurement-expiry rules. Driver support is required for additional sensor models.
 
-Keep producer and consumer accounts separate. Do not distribute Central's account to
-receivers. The included stack can create/import/revoke producer credentials; the current
-Central setup assistant uses a configured receiver account rather than generating a
-new isolated account per device.
+Discovery publications and templates have been tested; validation against a running
+Home Assistant installation remains pending. See the [integration reference](https://github.com/cajui/cajui-firmware/blob/a2ce332b2e3ff704f8e35032381786497c287968/docs/home-assistant.md)
+for entity definitions, topic permissions and handling of old retained configurations.
 
-Central uses a persistent MQTT session. The bundled broker configuration bounds its
-queue to 1000 messages per client and expires sessions after seven days of absence.
-These are configuration limits, not inherent MQTT promises. Retained state describes
-last-known values; telemetry history belongs to a consumer database. A broker restart,
-incorrect ACL or full queue must be diagnosed separately from radio delivery.
+## Accounts and permissions
 
-Sources: [Central MQTT configuration](https://github.com/cajui/cajui-central/blob/76a9a189d9a8101bc74b07f6723f9541f9acb05d/README.md),
-[management contract](https://github.com/cajui/cajui-firmware/blob/a2ce332b2e3ff704f8e35032381786497c287968/docs/management-v1.md),
-[Home Assistant contract and ACLs](https://github.com/cajui/cajui-firmware/blob/a2ce332b2e3ff704f8e35032381786497c287968/docs/home-assistant.md).
+Use separate receiver and application accounts. Grant each receiver access to its
+telemetry, management and Discovery namespaces. Grant consumers the subscriptions they
+need; administrative commands require additional permissions.
+
+The bundled stack includes tools to create, import and revoke producer credentials.
+Central's receiver setup assistant uses a configured producer account; it does not
+create a new account for each device. Current receiver connections use plain MQTT on
+a trusted network.
+
+## Sessions and retention
+
+Central uses a persistent MQTT session. The bundled broker configuration permits up to
+1000 queued messages per client and expires a session after seven days of absence.
+Adjustments to broker configuration can change these limits.
+
+Retained messages provide last-known state and entity definitions. Telemetry is published
+without retention; historical readings are stored by consuming applications. MQTT QoS 1
+permits duplicate delivery, handled by Central through sample identity.
+
+## References
+
+[MQTT management](https://github.com/cajui/cajui-firmware/blob/a2ce332b2e3ff704f8e35032381786497c287968/docs/management-v1.md) ·
+[Central broker configuration](https://github.com/cajui/cajui-central/blob/76a9a189d9a8101bc74b07f6723f9541f9acb05d/README.md) · [Delivery semantics](data-flow.md)

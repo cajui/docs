@@ -1,58 +1,76 @@
-# Evidence and implementation status
+# Project status and compatibility
 
-[Documentation home](../README.md) · [Inventory](inventory.md)
+[Documentation](../README.md)
 
-Reviewed on **2026-10-06** against these public revisions:
+Cajuí is under active development. The firmware applications are experimental.
+Supported features and known limitations are listed below; the [feature reference](inventory.md)
+provides the complete subsystem index.
 
-| Project | Reviewed revision | Integration status at review |
+## Documentation versions
+
+This documentation covers the following source revisions, checked on 2026-10-06:
+
+| Project | Revision | Availability at documentation update |
 | --- | --- | --- |
-| Cajuí Central | [`76a9a18`](https://github.com/cajui/cajui-central/tree/76a9a189d9a8101bc74b07f6723f9541f9acb05d) | [PR #33](https://github.com/cajui/cajui-central/pull/33) merged |
-| Cajuí Firmware | [`a2ce332`](https://github.com/cajui/cajui-firmware/tree/a2ce332b2e3ff704f8e35032381786497c287968) | [PR #25](https://github.com/cajui/cajui-firmware/pull/25) open |
+| Cajuí Central | [`76a9a18`](https://github.com/cajui/cajui-central/tree/76a9a189d9a8101bc74b07f6723f9541f9acb05d) | Included through merged [PR #33](https://github.com/cajui/cajui-central/pull/33) |
+| Cajuí Firmware | [`a2ce332`](https://github.com/cajui/cajui-firmware/tree/a2ce332b2e3ff704f8e35032381786497c287968) | Development branch, [PR #25](https://github.com/cajui/cajui-firmware/pull/25) |
 
-Links in these guides are pinned to those revisions so that evidence remains inspectable
-when branches move. They do not assert that a checkout of `main`, an installed image or
-a published release already contains every feature. Refresh this table and affected pages
-when adopting a newer baseline.
+Technical reference links target these revisions. Installed images and published releases
+may contain an earlier feature set.
 
-## Reading a status
+The development firmware adds the Stick Lite/SHT4x target, Wi-Fi scan recovery,
+independent persistence of verified Wi-Fi settings and MQTT recovery improvements.
+The Stick Lite target supports USB installation and is excluded from signed/web release
+artifacts at this version.
 
-- **Implemented:** behavior exists in the reviewed source. Release availability and
-  physical validation are separate questions.
-- **Experimental / PR:** source exists but is still under review or excluded from normal
-  release/install paths. Current firmware applications are experimental in general.
-- **Planned / not implemented:** describes a direction or absence, not a supported option.
-- **Unvalidated:** the relevant observation or independent check has not been established.
+## Feature labels
 
-## Known evidence gaps
+- **Implemented:** available in the documented implementation.
+- **Development:** available in the firmware development revision above.
+- **Validation pending:** implemented behavior with outstanding physical or integration checks.
+- **Unsupported:** outside the current implementation.
 
-- Radio range, collisions at scale, sustained cadence and real sleep consumption.
-- Battery divider calibration and provisional low-voltage thresholds.
-- Arbitrary power-loss behavior and flash endurance on the physical storage adapter.
-- Independent security audit and active-attacker authentication during radio pairing.
-- Receiver MQTT TLS and authenticated setup access point.
-- Full Home Assistant installation test (Discovery messages/templates have narrower checks).
-- PR #25 Wi-Fi-only power-cycle persistence and read-only setup visit without MQTT interruption.
+These labels describe software availability; hardware compatibility and validation
+requirements still apply.
 
-The project does not provide a finalized public enclosure/custom PCB assembly here.
-NFC pairing, a dedicated OS distribution, a native Windows installer and LoRaWAN are not
-current capabilities. These directions are not delivery commitments.
+## Known limitations
 
-## Source-of-truth index
+### Radio and hardware
 
-| Subject | Owning reference |
+Radio range, operation under sustained interference, capacity at scale, sleep consumption,
+battery calibration and low-voltage thresholds require further measurement. Physical
+storage testing for arbitrary power loss and flash endurance is incomplete.
+
+Current sensor applications support the documented climate sensors. Additional drivers
+and application configuration are required for other models. The protocol provides direct
+LoRa telemetry; LoRaWAN, mesh, TDMA and actuator control are unsupported.
+
+### Security
+
+The protocol has not undergone an independent security audit. Radio pairing lacks
+active-attacker authentication. The temporary setup access point is open while enabled,
+and the receiver uses plain MQTT rather than TLS. Deploy within the trust boundaries
+specified in [radio and security](radio-security.md).
+
+### Integration testing
+
+Home Assistant Discovery messages and templates have been checked; testing against a
+running Home Assistant installation remains pending. The development firmware's
+Wi-Fi-only persistence across physical power cycles and uninterrupted MQTT during a
+read-only setup visit also require hardware verification.
+
+## Technical references
+
+| Subject | Reference |
 | --- | --- |
-| Firmware implementation and limits | [README](https://github.com/cajui/cajui-firmware/tree/a2ce332b2e3ff704f8e35032381786497c287968/README.md) |
-| Radio wire format and ACK | [Protocol](https://github.com/cajui/cajui-firmware/tree/a2ce332b2e3ff704f8e35032381786497c287968/docs/protocol-v1.md) |
-| Runtime delivery | [Runtime](https://github.com/cajui/cajui-firmware/tree/a2ce332b2e3ff704f8e35032381786497c287968/docs/runtime.md) |
-| Durable state | [Persistence](https://github.com/cajui/cajui-firmware/tree/a2ce332b2e3ff704f8e35032381786497c287968/docs/persistence.md) |
-| Board behavior and MQTT forwarding | [Applications](https://github.com/cajui/cajui-firmware/tree/a2ce332b2e3ff704f8e35032381786497c287968/docs/radio-applications.md) |
-| Stick Lite/SHT4x | [Board guide](https://github.com/cajui/cajui-firmware/tree/a2ce332b2e3ff704f8e35032381786497c287968/docs/stick-lite.md) |
-| Provisioning and pairing | [USB](https://github.com/cajui/cajui-firmware/tree/a2ce332b2e3ff704f8e35032381786497c287968/docs/provisioning.md), [radio](https://github.com/cajui/cajui-firmware/tree/a2ce332b2e3ff704f8e35032381786497c287968/docs/radio-pairing.md) |
-| MQTT state and commands | [Management](https://github.com/cajui/cajui-firmware/tree/a2ce332b2e3ff704f8e35032381786497c287968/docs/management-v1.md) |
-| Home Assistant | [Integration](https://github.com/cajui/cajui-firmware/tree/a2ce332b2e3ff704f8e35032381786497c287968/docs/home-assistant.md) |
-| Signed updates and installation | [Updates](https://github.com/cajui/cajui-firmware/tree/a2ce332b2e3ff704f8e35032381786497c287968/docs/updates.md) |
-| Monitoring, UI and consumer semantics | [Central README](https://github.com/cajui/cajui-central/tree/76a9a189d9a8101bc74b07f6723f9541f9acb05d/README.md) |
-
-When source documentation contains historical wording inconsistent with a newer section,
-check the implementation and revision before generalizing. File a correction in the owning
-project rather than silently inventing a contract in this repository.
+| Firmware capabilities | [README](https://github.com/cajui/cajui-firmware/blob/a2ce332b2e3ff704f8e35032381786497c287968/README.md) |
+| Radio protocol | [Specification](https://github.com/cajui/cajui-firmware/blob/a2ce332b2e3ff704f8e35032381786497c287968/docs/protocol-v1.md) |
+| Delivery state machine | [Runtime](https://github.com/cajui/cajui-firmware/blob/a2ce332b2e3ff704f8e35032381786497c287968/docs/runtime.md) |
+| Durable records and queue | [Persistence](https://github.com/cajui/cajui-firmware/blob/a2ce332b2e3ff704f8e35032381786497c287968/docs/persistence.md) |
+| Board behavior and MQTT forwarding | [Applications](https://github.com/cajui/cajui-firmware/blob/a2ce332b2e3ff704f8e35032381786497c287968/docs/radio-applications.md) |
+| Stick Lite/SHT4x | [Board guide](https://github.com/cajui/cajui-firmware/blob/a2ce332b2e3ff704f8e35032381786497c287968/docs/stick-lite.md) |
+| Provisioning and pairing | [USB](https://github.com/cajui/cajui-firmware/blob/a2ce332b2e3ff704f8e35032381786497c287968/docs/provisioning.md), [radio](https://github.com/cajui/cajui-firmware/blob/a2ce332b2e3ff704f8e35032381786497c287968/docs/radio-pairing.md) |
+| MQTT management | [Contract](https://github.com/cajui/cajui-firmware/blob/a2ce332b2e3ff704f8e35032381786497c287968/docs/management-v1.md) |
+| Home Assistant | [Integration](https://github.com/cajui/cajui-firmware/blob/a2ce332b2e3ff704f8e35032381786497c287968/docs/home-assistant.md) |
+| Installation and updates | [Firmware updates](https://github.com/cajui/cajui-firmware/blob/a2ce332b2e3ff704f8e35032381786497c287968/docs/updates.md) |
+| Central APIs and configuration | [Central README](https://github.com/cajui/cajui-central/blob/76a9a189d9a8101bc74b07f6723f9541f9acb05d/README.md) |

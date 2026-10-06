@@ -1,29 +1,27 @@
-# Radio, pairing and security
+# Radio and security
 
-[Documentation home](../README.md) · [Delivery boundaries](data-flow.md)
+[Documentation](../README.md)
 
-## Radio topology and scheduling
+## Topology and scheduling
 
-The current protocol is a direct LoRa star: multiple enrolled transmitters communicate
-with a receiver using a shared radio profile. It is not LoRaWAN, a mesh or a TDMA
-schedule. Channel activity detection, jitter and bounded retries reduce contention;
-they cannot eliminate collisions or guarantee a node count at a particular range.
+The direct LoRa protocol connects enrolled transmitters to a receiver using a shared
+radio profile. Channel activity detection, jitter and bounded retries reduce contention.
+The current protocol does not implement LoRaWAN, mesh routing or TDMA scheduling.
 
-The radio profile, antenna, region, reporting intervals and interference determine
-practical capacity. Network identifiers separate logical networks but cannot stop
-another radio occupying the same channel. Do not mistake encryption for interference
-protection. Use the [profile and power instructions](https://github.com/cajui/cajui-firmware/blob/a2ce332b2e3ff704f8e35032381786497c287968/docs/radio-applications.md)
-for a specific build; this overview is not a frequency/regulatory guide.
+Airtime, reporting intervals, antenna performance and interference determine practical
+capacity. Network IDs distinguish logical networks; radios on the same channel still
+share airtime. Configure frequency and transmit power for the deployment's region and
+antenna using the [radio application settings](https://github.com/cajui/cajui-firmware/blob/a2ce332b2e3ff704f8e35032381786497c287968/docs/radio-applications.md).
 
-## Identity, enrollment and display names
+## Device identity and enrollment
 
-Stable network/node IDs are public identifiers. A binding associates a transmitter
-with a receiver and a unique key. Renaming a device in Central changes a display name,
-not that binding. Revoking a transmitter changes radio authorization; removing its
-card only changes the application's inventory presentation.
+Network and node IDs are public identifiers. Enrollment creates a binding between a
+transmitter and receiver with a unique cryptographic key. Display names in Central are
+independent of this binding.
 
-USB provisioning and operator-triggered radio pairing create the same kind of binding.
-The radio flow is:
+USB provisioning and radio pairing create compatible bindings. Radio pairing requires
+an operator to open a two-minute receiver window, request joining on the transmitter
+and approve the candidate identity.
 
 ```mermaid
 sequenceDiagram
@@ -40,24 +38,32 @@ sequenceDiagram
     Note over R,T: Fresh binding stored.<br/>See contract for exact messages.
 ```
 
-The sketch intentionally omits wire-level messages. Use the
-[radio pairing specification](https://github.com/cajui/cajui-firmware/blob/a2ce332b2e3ff704f8e35032381786497c287968/docs/radio-pairing.md) for the complete exchange.
+This diagram summarizes the operator flow. Message formats, key derivation and state
+transitions are specified in the [pairing protocol](https://github.com/cajui/cajui-firmware/blob/a2ce332b2e3ff704f8e35032381786497c287968/docs/radio-pairing.md).
 
-## Security boundaries
+## Protection mechanisms
 
-| Mechanism | Protects against / enables | Remaining boundary |
+| Mechanism | Purpose | Limitation |
 | --- | --- | --- |
-| AES-128-GCM DATA/ACK | Confidentiality and authenticated telemetry | Does not hide every header or prevent jamming |
-| Per-binding keys | Isolation between enrolled nodes | Key handling/provisioning must remain trustworthy |
-| Durable counters and replay receipts | Nonce uniqueness and duplicate/replay decisions | Restoring old state under a current key is unsafe |
-| X25519/HKDF radio pairing | Key agreement protected from passive interception | Active-attacker authentication during pairing remains unresolved |
-| Short, operator-opened pairing window | Limits when joining is possible | Physical action is not cryptographic identity verification |
-| Local setup form/session checks | Constrains web requests | Setup Wi-Fi AP is still open to nearby users while enabled |
-| MQTT credentials and ACLs | Restricts publishing/subscribing | Current receiver transport is plain TCP, not TLS |
+| AES-128-GCM | Encrypts and authenticates DATA/ACK payloads | Headers remain visible; jamming is possible |
+| Unique binding keys | Separates credentials between enrolled nodes | Provisioning and key storage must be trusted |
+| Durable counters and replay receipts | Preserves nonce uniqueness and rejects replays | Old counter state must not be restored under an active key |
+| X25519/HKDF pairing | Establishes a shared key resistant to passive interception | Active-attacker authentication is not implemented |
+| Operator-opened pairing window | Limits when enrollment requests are accepted | Physical access does not authenticate radio peers cryptographically |
+| Setup session and request validation | Restricts accepted web requests | The temporary setup access point is open while enabled |
+| MQTT accounts and ACLs | Restricts topic access | Current receiver MQTT transport uses plain TCP |
 
-The protocol has not undergone an independent security audit. Preserve enrollment,
-counters and queue storage during normal updates. Never clone secrets or restore old
-counter records as a way to reuse an enrolled image.
+## Trust boundaries
 
-Sources: [protocol](https://github.com/cajui/cajui-firmware/blob/a2ce332b2e3ff704f8e35032381786497c287968/docs/protocol-v1.md), [persistent state](https://github.com/cajui/cajui-firmware/blob/a2ce332b2e3ff704f8e35032381786497c287968/docs/persistence.md),
-[pairing](https://github.com/cajui/cajui-firmware/blob/a2ce332b2e3ff704f8e35032381786497c287968/docs/radio-pairing.md), [security policy](https://github.com/cajui/cajui-firmware/blob/a2ce332b2e3ff704f8e35032381786497c287968/SECURITY.md).
+The setup access point permits nearby clients to join while it is enabled. Operators
+should perform configuration and pairing in a controlled environment. The receiver's
+MQTT connection requires a trusted local network until TLS support is available.
+
+The protocol has not undergone an independent security audit. Preserve enrollment and
+counter records during updates. Revocation invalidates a radio binding; removing a
+Central registration or disabling an MQTT account affects different layers.
+
+## References
+
+[Protocol](https://github.com/cajui/cajui-firmware/blob/a2ce332b2e3ff704f8e35032381786497c287968/docs/protocol-v1.md) · [Persistent state](https://github.com/cajui/cajui-firmware/blob/a2ce332b2e3ff704f8e35032381786497c287968/docs/persistence.md) ·
+[USB provisioning](https://github.com/cajui/cajui-firmware/blob/a2ce332b2e3ff704f8e35032381786497c287968/docs/provisioning.md) · [Security policy](https://github.com/cajui/cajui-firmware/blob/a2ce332b2e3ff704f8e35032381786497c287968/SECURITY.md)

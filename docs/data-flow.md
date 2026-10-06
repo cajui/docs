@@ -1,10 +1,12 @@
-# A measurement's journey
+# Data flow and delivery semantics
 
-[Documentation home](../README.md) · [MQTT](mqtt-integrations.md)
+[Documentation](../README.md)
 
-Example: a climate sensor returns temperature and humidity. These are two metrics
-of one sensor, grouped in one sample. The following describes successful delivery;
-the failure cases below matter just as much.
+A transmitter groups sensor readings into a sample, assigns a counter and sends an
+authenticated DATA frame. The receiver verifies the frame and persists its acceptance
+before acknowledging it. Forwarding to MQTT runs independently of radio reception.
+
+## Successful delivery
 
 ```mermaid
 sequenceDiagram
@@ -30,41 +32,56 @@ sequenceDiagram
     Note over R,C: No application receipt from Central to receiver
 ```
 
-Broker delivery to consumers and its PUBACK to the publisher may occur in a different
-order. The sequence separates responsibilities; it is not a global timing guarantee.
+The broker may forward a message to subscribers before or after acknowledging the
+publisher. Each acknowledgement belongs to its own connection and delivery stage.
 
-## Three boundaries, not one end-to-end receipt
+## Acknowledgements
 
-| Confirmation | What it establishes | What it does not establish |
+| Stage | Confirmation | Meaning |
 | --- | --- | --- |
-| Radio ACK | Receiver durably accepted this frame | Broker or Central received it |
-| Publisher PUBACK | Broker completed the MQTT acknowledgement step | Central stored it, broker fsync, or even ACL acceptance under MQTT 3.1.1 |
-| Central's consumer ACK | Central stored or permanently rejected its delivery | A new application-level receipt sent back to the receiver |
+| Transmitter → receiver | Authenticated radio ACK | The receiver durably accepted the matching frame |
+| Receiver → broker | MQTT PUBACK | The broker acknowledged the publication; the receiver may remove its queued copy |
+| Broker → Central | Consumer-side MQTT acknowledgement | Central stored the sample or permanently rejected it |
 
-Under MQTT 3.1.1, a broker can acknowledge an ACL-denied publication. Validate
-permissions by checking downstream receipt, not only a successful publish callback.
+There is no application-level receipt from Central to the receiver. A publisher PUBACK
+does not guarantee consumer processing or broker disk synchronization. MQTT 3.1.1 also
+allows acknowledgement of ACL-denied publications, so deployment checks must verify
+successful downstream receipt.
 
-## Identity and time
+## Sample identity
 
-The encrypted radio payload includes metric IDs, units, statuses and values. A sample
-counter and enrollment generation form the forwarded `sample_id`. Central deduplicates
-by `(source_id, device_id, sample_id)`; a retry keeps this identity. Different content
-under the same identity is a conflict.
+The radio payload contains sensor and metric identifiers, units, statuses and values.
+The receiver combines the enrollment generation and sample counter into the forwarded
+`sample_id`. Retries preserve this identity.
 
-The radio format has no wall-clock measurement timestamp. The receiver omits
-`measured_at`, and Central records arrival time. A queued old measurement can therefore
-arrive now. Do not interpret a freshly received backlog as proof of a current measurement.
-An error or skipped status is not a valid zero measurement.
+Central deduplicates samples by `(source_id, device_id, sample_id)`. Repeated content
+under the same identity is accepted as a duplicate; changed content is rejected as a
+conflict. A repeated sample does not extend the device's freshness deadline.
 
-## Where loss is still possible
+## Timestamps and measurement quality
 
-- A transmitter exhausts its bounded attempts: it does not retain that sample for the next wake.
-- Radio ACK is lost after receiver acceptance: a retry is recognized, without accepting a second copy.
-- Broker is unavailable: receiver queues samples, but drops the oldest once its 128-sample capacity fills.
-- PUBACK is lost: receiver republishes; consumers must tolerate duplicates.
-- Central is offline: its broker session can buffer messages, subject to queue/expiry limits.
-- Broker permissions, persistence failures or capacity limits can still cause data loss.
+The radio format carries no wall-clock measurement timestamp. The receiver omits
+`measured_at`, and Central records `received_at` when it processes the sample. For queued
+samples, that time reflects forwarding delay as well as acquisition time.
 
-Sources: [durable radio acceptance](https://github.com/cajui/cajui-firmware/blob/a2ce332b2e3ff704f8e35032381786497c287968/docs/protocol-v1.md),
-[forwarding](https://github.com/cajui/cajui-firmware/blob/a2ce332b2e3ff704f8e35032381786497c287968/docs/radio-applications.md),
-[consumer delivery and silence rules](https://github.com/cajui/cajui-central/blob/76a9a189d9a8101bc74b07f6723f9541f9acb05d/README.md).
+Each reading has a status. Error and skipped readings have no usable measurement value;
+consumers must distinguish them from a valid zero reading.
+
+## Buffering and failure handling
+
+| Failure | Behavior |
+| --- | --- |
+| Radio attempts exhausted | The transmitter logs the failed cycle and resumes its schedule; the sample is not backlogged |
+| Radio ACK lost | A retransmission is recognized through persisted acceptance state |
+| Broker unavailable | The receiver retains queued samples and retries forwarding |
+| Receiver queue full | The oldest sample is dropped to retain the newest 128 samples |
+| Publisher PUBACK lost | The receiver republishes with the same sample identity |
+| Central offline | Its persistent broker session buffers messages within configured queue and expiry limits |
+
+Broker permissions, bounded queues and storage failures can still cause data loss.
+
+## References
+
+[Radio protocol](https://github.com/cajui/cajui-firmware/blob/a2ce332b2e3ff704f8e35032381786497c287968/docs/protocol-v1.md) ·
+[MQTT forwarding](https://github.com/cajui/cajui-firmware/blob/a2ce332b2e3ff704f8e35032381786497c287968/docs/radio-applications.md) ·
+[Central ingestion](https://github.com/cajui/cajui-central/blob/76a9a189d9a8101bc74b07f6723f9541f9acb05d/README.md)

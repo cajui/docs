@@ -1,24 +1,31 @@
-# Contributing
+# Contributing to Cajuí Documentation
 
-These guides explain the public Cajuí ecosystem. Keep content in English and distinguish
-implemented behavior, unreleased experiments, plans and physical validation.
+Contributions are welcome, including corrections, installation guidance, troubleshooting
+procedures and architecture explanations.
 
-1. Identify the owning source and exact revision for a claim.
-2. Update the relevant guide and the capability inventory when status changes.
-3. Keep technical contracts in their owning project; link rather than duplicate them.
-4. Edit Mermaid diagram sources in Markdown when changing a flow.
-5. Run `python3 scripts/check_docs.py` before opening a pull request.
-6. Preview affected Markdown and diagrams on GitHub.
+## Writing conventions
 
-Do not add credentials, device-specific configuration, private notes, local machine paths
-or photographs without authorization. Use illustrative identities rather than installation
-data. Do not publish unvalidated hardware as assembly instructions.
+- Write in English for users and contributors of the project.
+- Introduce a component's purpose before its implementation details.
+- Use consistent names for devices, services and message types.
+- Document requirements, expected results and relevant failure cases.
+- Distinguish implemented features from development work and outstanding validation.
+- Keep technical specifications in their implementation repositories and link to them.
+- Use synthetic examples and omit credentials or identifying deployment data.
 
-The check script verifies local file/heading links, balanced code fences, diagram presence
-and unresolved source placeholders. It does not check external website availability,
-render Mermaid or validate technical claims; those require review.
+## Updating documentation
 
-GitHub Pages is a future presentation option, not part of the current repository build.
-No runtime dependency is added to Central or firmware by editing these guides.
+1. Check the implementation and the versions listed in [project status](docs/status.md).
+2. Update the affected guides, feature reference and diagrams together.
+3. Keep source links pinned to the documented revisions. Update the version table when
+   changing the implementation baseline.
+4. Run `python3 scripts/check_docs.py`.
+5. Preview the Markdown and Mermaid diagrams, then submit a pull request.
 
-Contributions are licensed under Apache-2.0, as described in [LICENSE](LICENSE).
+The validation script checks local file and heading links, balanced code fences,
+diagram presence and unresolved source placeholders. Diagram rendering and external
+references require separate review.
+
+## License
+
+Contributions are licensed under [Apache-2.0](LICENSE).

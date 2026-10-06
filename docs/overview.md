@@ -1,13 +1,13 @@
-# System overview
+# Architecture
 
-[Documentation home](../README.md) · [Capability inventory](inventory.md)
+[Documentation](../README.md)
 
-Cajuí transports measurements from sensor nodes to software on a local network.
-A transmitter reads its connected sensor and sends a LoRa frame. A receiver accepts
-that frame and forwards a sample to an MQTT broker. Cajuí Central or Home Assistant
-can consume the sample; neither consumer is part of the LoRa radio link.
+Cajuí uses a star topology to collect measurements from remote sensor nodes. Each
+transmitter reads a connected sensor and sends authenticated LoRa frames to an enrolled
+receiver. The receiver stores accepted samples and forwards them over Wi-Fi to an MQTT
+broker. Applications subscribe to the broker to process and display the data.
 
-## Physical arrangement
+## Physical topology
 
 ```mermaid
 flowchart LR
@@ -22,12 +22,12 @@ flowchart LR
     HOST --> UI[Browser]
 ```
 
-This is a topology illustration, not a claim about a particular installation,
-range or number of tested nodes. Remote transmitters do not need Wi-Fi coverage
-in normal operation. The receiver needs connectivity to the broker. Local use does
-not require a cloud service; internet may be needed to obtain software and updates.
+Transmitters operate within LoRa coverage of the receiver. Only the receiver requires
+Wi-Fi access to the local network. The broker and monitoring application can run on the
+same computer or separate hosts. Local telemetry and monitoring operate without a cloud
+service; software downloads and updates may require internet access.
 
-## Software arrangement
+## Services and communication
 
 ```mermaid
 flowchart TB
@@ -41,21 +41,28 @@ flowchart TB
     B -->|Pairing and revocation commands| RF
 ```
 
-The broker and Central may run on the same computer, including as separate containers.
-The browser is a client of Central, not another server. Home Assistant is an alternative
-or additional MQTT consumer; stopping Central does not prevent a receiver from publishing.
+The receiver firmware handles the radio link and MQTT forwarding. The broker routes
+messages according to topic subscriptions and access rules. Cajuí Central validates
+samples, stores them in SQLite and serves the browser interface. Home Assistant can
+subscribe alongside Central or serve as the sole monitoring application.
 
-## Names that matter
+An authorized application can also send management commands through MQTT to request
+pairing or transmitter revocation. The receiver advertises the commands it supports.
+Telemetry and management use separate topic families.
 
-- **Cajuí** refers to the ecosystem; **Cajuí Central** is the monitoring application.
-- **Receiver** refers to the LoRa device, not the computer hosting Central.
-- A **sensor** is a measuring component; a **measurement** is one quantity it reports.
-  One SHT40 supplies temperature and humidity.
-- A **transmitter** runs firmware and can carry sensor readings; its radio is not the sensor.
-- **Firmware** is software installed on a board, not a separate physical box.
+## Data model
 
-The protocol can describe several metrics, but current reference applications use one
-climate sensor. This does not provide universal plug-and-play support for arbitrary sensors.
+- A **device** has a stable identity. Radio devices operate as transmitters or receivers.
+- A **sensor** belongs to a transmitter and supplies one or more metrics.
+- A **metric** identifies a quantity, such as temperature or relative humidity.
+- A **sample** groups readings under a shared identity for delivery and deduplication.
 
-Sources: [firmware scope](https://github.com/cajui/cajui-firmware/blob/a2ce332b2e3ff704f8e35032381786497c287968/README.md), [Central scope](https://github.com/cajui/cajui-central/blob/76a9a189d9a8101bc74b07f6723f9541f9acb05d/README.md),
-[Home Assistant integration](https://github.com/cajui/cajui-firmware/blob/a2ce332b2e3ff704f8e35032381786497c287968/docs/home-assistant.md).
+For example, an SHT40 supplies temperature and humidity as two metrics from one sensor.
+Current reference applications read one climate sensor per transmitter. The radio
+format supports up to eight metrics per frame; additional sensor models require driver
+and application support.
+
+## Implementation references
+
+[Firmware architecture](https://github.com/cajui/cajui-firmware/blob/a2ce332b2e3ff704f8e35032381786497c287968/docs/runtime.md) ·
+[Central](https://github.com/cajui/cajui-central/blob/76a9a189d9a8101bc74b07f6723f9541f9acb05d/README.md) · [MQTT](mqtt-integrations.md) · [Data flow](data-flow.md)
