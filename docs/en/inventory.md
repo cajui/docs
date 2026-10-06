@@ -1,6 +1,8 @@
 # Feature reference
 
-[Documentation](../README.md)
+English | [Português brasileiro](../pt-BR/inventory.md)
+
+[Documentation](../../README.md)
 
 Features are grouped by subsystem. Status labels refer to the versions listed in
 [project status](status.md); firmware applications remain experimental.

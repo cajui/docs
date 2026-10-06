@@ -1,6 +1,8 @@
 # Data flow and delivery semantics
 
-[Documentation](../README.md)
+English | [Português brasileiro](../pt-BR/data-flow.md)
+
+[Documentation](../../README.md)
 
 A transmitter groups sensor readings into a sample, assigns a counter and sends an
 authenticated DATA frame. The receiver verifies the frame and persists its acceptance

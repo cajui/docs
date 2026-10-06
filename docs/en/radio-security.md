@@ -1,6 +1,8 @@
 # Radio and security
 
-[Documentation](../README.md)
+English | [Português brasileiro](../pt-BR/radio-security.md)
+
+[Documentation](../../README.md)
 
 ## Topology and scheduling
 

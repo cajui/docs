@@ -1,6 +1,8 @@
 # Architecture
 
-[Documentation](../README.md)
+English | [Português brasileiro](../pt-BR/overview.md)
+
+[Documentation](../../README.md)
 
 Cajuí uses a star topology to collect measurements from remote sensor nodes. Each
 transmitter reads a connected sensor and sends authenticated LoRa frames to an enrolled

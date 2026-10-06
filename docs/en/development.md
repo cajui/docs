@@ -1,6 +1,8 @@
 # Development
 
-[Documentation](../README.md)
+English | [Português brasileiro](../pt-BR/development.md)
+
+[Documentation](../../README.md)
 
 ## Repositories and modules
 
@@ -63,4 +65,4 @@ measured. See [firmware testing](https://github.com/cajui/cajui-firmware/blob/a2
 ## Documentation contributions
 
 Edit Markdown and Mermaid sources directly. Run `python3 scripts/check_docs.py` and
-preview affected diagrams before submitting changes. See [CONTRIBUTING.md](../CONTRIBUTING.md).
+preview affected diagrams before submitting changes. See [CONTRIBUTING.md](../../CONTRIBUTING.md).

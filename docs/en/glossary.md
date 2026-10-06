@@ -1,6 +1,8 @@
 # Glossary
 
-[Documentation](../README.md)
+English | [Português brasileiro](../pt-BR/glossary.md)
+
+[Documentation](../../README.md)
 
 | Term | Definition |
 | --- | --- |

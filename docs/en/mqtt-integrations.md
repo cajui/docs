@@ -1,6 +1,8 @@
 # MQTT and integrations
 
-[Documentation](../README.md)
+English | [Português brasileiro](../pt-BR/mqtt-integrations.md)
+
+[Documentation](../../README.md)
 
 The MQTT broker connects receivers to monitoring applications. Receivers publish
 telemetry, device state and Home Assistant entity definitions. Authorized clients can

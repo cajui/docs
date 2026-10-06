@@ -1,6 +1,8 @@
 # Operations and troubleshooting
 
-[Documentation](../README.md)
+English | [Português brasileiro](../pt-BR/operations.md)
+
+[Documentation](../../README.md)
 
 ## Troubleshooting
 

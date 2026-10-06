@@ -1,6 +1,8 @@
 # Cajuí Central
 
-[Documentation](../README.md)
+English | [Português brasileiro](../pt-BR/central.md)
+
+[Documentation](../../README.md)
 
 Cajuí Central is a Go monitoring server with SQLite storage and an embedded web interface.
 It accepts MQTT samples and HTTP readings, validates incoming data, and provides device

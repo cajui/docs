@@ -1,6 +1,8 @@
 # Project status and compatibility
 
-[Documentation](../README.md)
+English | [Português brasileiro](../pt-BR/status.md)
+
+[Documentation](../../README.md)
 
 Cajuí is under active development. The firmware applications are experimental.
 Supported features and known limitations are listed below; the [feature reference](inventory.md)

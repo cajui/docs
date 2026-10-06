@@ -1,6 +1,8 @@
 # Installation and configuration
 
-[Documentation](../README.md)
+English | [Português brasileiro](../pt-BR/setup.md)
+
+[Documentation](../../README.md)
 
 ## Requirements
 

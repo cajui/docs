@@ -1,6 +1,8 @@
 # Components
 
-[Documentation](../README.md)
+English | [Português brasileiro](../pt-BR/components.md)
+
+[Documentation](../../README.md)
 
 ## System components
 
