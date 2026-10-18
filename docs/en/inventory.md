@@ -12,13 +12,13 @@ Features are grouped by subsystem. Status labels refer to the versions listed in
 | Feature | Status | Details |
 | --- | --- | --- |
 | DHT22/AM2302 readings | Implemented | Temperature and humidity on the WiFi LoRa 32 V3 transmitter |
-| SHT4x readings | Development | I2C driver and Wireless Stick Lite V3 target |
-| SHT4x CRC validation | Development | Checks both response words and reports measurement errors |
-| Sensor supply switching and deep sleep | Implemented; SHT4x integration in development | Sensor power is disabled between reporting cycles |
+| SHT4x readings | Implemented | I2C driver and Wireless Stick Lite V3 target |
+| SHT4x CRC validation | Implemented | Checks both response words and reports measurement errors |
+| Sensor supply switching and deep sleep | Implemented | Sensor power is disabled between reporting cycles |
 | Battery measurement and low-voltage scheduling | Validation pending | Divider calibration and thresholds require hardware measurement |
 
-References: [sensor applications](https://github.com/cajui/cajui-firmware/blob/a2ce332b2e3ff704f8e35032381786497c287968/docs/radio-applications.md),
-[Stick Lite](https://github.com/cajui/cajui-firmware/blob/a2ce332b2e3ff704f8e35032381786497c287968/docs/stick-lite.md).
+References: [sensor applications](https://github.com/cajui/cajui-firmware/blob/de9ddaa602faa6507a686a9f468d8f7377fd09dd/docs/radio-applications.md),
+[Stick Lite](https://github.com/cajui/cajui-firmware/blob/de9ddaa602faa6507a686a9f468d8f7377fd09dd/docs/stick-lite.md).
 
 ## Radio and enrollment
 
@@ -34,8 +34,8 @@ References: [sensor applications](https://github.com/cajui/cajui-firmware/blob/a
 | Version-2 ACK power command | Implemented | Protocol supports a command; the receiver currently requests no change |
 | RSSI and SNR readings | Implemented | Receiver reports diagnostics for accepted radio frames |
 
-References: [protocol](https://github.com/cajui/cajui-firmware/blob/a2ce332b2e3ff704f8e35032381786497c287968/docs/protocol-v1.md), [runtime](https://github.com/cajui/cajui-firmware/blob/a2ce332b2e3ff704f8e35032381786497c287968/docs/runtime.md),
-[USB provisioning](https://github.com/cajui/cajui-firmware/blob/a2ce332b2e3ff704f8e35032381786497c287968/docs/provisioning.md), [pairing](https://github.com/cajui/cajui-firmware/blob/a2ce332b2e3ff704f8e35032381786497c287968/docs/radio-pairing.md).
+References: [protocol](https://github.com/cajui/cajui-firmware/blob/de9ddaa602faa6507a686a9f468d8f7377fd09dd/docs/protocol-v1.md), [runtime](https://github.com/cajui/cajui-firmware/blob/de9ddaa602faa6507a686a9f468d8f7377fd09dd/docs/runtime.md),
+[USB provisioning](https://github.com/cajui/cajui-firmware/blob/de9ddaa602faa6507a686a9f468d8f7377fd09dd/docs/provisioning.md), [pairing](https://github.com/cajui/cajui-firmware/blob/de9ddaa602faa6507a686a9f468d8f7377fd09dd/docs/radio-pairing.md).
 
 ## Receiver setup and forwarding
 
@@ -45,16 +45,16 @@ References: [protocol](https://github.com/cajui/cajui-firmware/blob/a2ce332b2e3f
 | Persistent sample queue | Implemented | Holds the newest 128 samples; counts dropped oldest entries |
 | QoS 1 MQTT forwarding | Implemented | Removes a queued sample after its matching publisher PUBACK |
 | Temporary Wi-Fi setup page | Implemented | Button-triggered access point, configuration and status |
-| Network selector and scan recovery | Development | Bounded scan retries and manual hidden-network entry |
-| Independent Wi-Fi persistence | Development | Saves verified Wi-Fi before MQTT configuration |
-| MQTT recovery after Wi-Fi trials | Development | Restores suspended connections with bounded retries |
+| Network selector and scan recovery | Implemented | Bounded scan retries and manual hidden-network entry |
+| Independent Wi-Fi persistence | Implemented | Saves verified Wi-Fi before MQTT configuration |
+| MQTT recovery after Wi-Fi trials | Implemented | Restores suspended connections with bounded retries |
 | Broker discovery | Implemented | mDNS address discovery with a host announcement |
 | Availability and device state | Implemented | Retained MQTT state and receiver Last Will |
 | MQTT pairing and revocation commands | Implemented | Available to authorized clients through the management channel |
 | Home Assistant MQTT Discovery | Implemented; integration validation pending | Publishes supported entity definitions |
 
-References: [applications](https://github.com/cajui/cajui-firmware/blob/a2ce332b2e3ff704f8e35032381786497c287968/docs/radio-applications.md),
-[management](https://github.com/cajui/cajui-firmware/blob/a2ce332b2e3ff704f8e35032381786497c287968/docs/management-v1.md), [Home Assistant](https://github.com/cajui/cajui-firmware/blob/a2ce332b2e3ff704f8e35032381786497c287968/docs/home-assistant.md).
+References: [applications](https://github.com/cajui/cajui-firmware/blob/de9ddaa602faa6507a686a9f468d8f7377fd09dd/docs/radio-applications.md),
+[management](https://github.com/cajui/cajui-firmware/blob/de9ddaa602faa6507a686a9f468d8f7377fd09dd/docs/management-v1.md), [Home Assistant](https://github.com/cajui/cajui-firmware/blob/de9ddaa602faa6507a686a9f468d8f7377fd09dd/docs/home-assistant.md).
 
 ## Monitoring
 
@@ -64,7 +64,7 @@ References: [applications](https://github.com/cajui/cajui-firmware/blob/a2ce332b
 | Persistent MQTT consumer session | Implemented | Broker buffers messages within configured limits |
 | Device and sensor registration | Implemented | Display names and locations |
 | Dashboard arrangement | Implemented | Sections containing devices, sensors or individual measurements |
-| History and CSV export | Implemented | Stored readings and measurement-quality indicators |
+| History and CSV export | Implemented | Date-range history with paginated original readings; CSV covers recent overview data |
 | Silence detection | Implemented | Based on new unique samples and expected reporting intervals |
 | Receiver setup assistant | Implemented | Connection details and incoming-state verification |
 | Receiver and sensor list removal | Implemented | Preserves history; qualifying observations restore items |
@@ -72,7 +72,7 @@ References: [applications](https://github.com/cajui/cajui-firmware/blob/a2ce332b
 | Live connection-state updates | Implemented | SSE with interruption recovery |
 | UI localization | Implemented | English and Brazilian Portuguese |
 
-Reference: [Central configuration and interface](https://github.com/cajui/cajui-central/blob/76a9a189d9a8101bc74b07f6723f9541f9acb05d/README.md).
+Reference: [Central configuration and interface](https://github.com/cajui/cajui-central/blob/23ee539454c133fee42e020975e7d3dc662937e9/README.md).
 
 ## Maintenance
 
@@ -82,7 +82,7 @@ Reference: [Central configuration and interface](https://github.com/cajui/cajui-
 | Application rollback | Implemented | Two application slots and boot validation |
 | USB installation and updates | Implemented | Separate new-board and storage-preserving update procedures |
 
-Reference: [firmware updates](https://github.com/cajui/cajui-firmware/blob/a2ce332b2e3ff704f8e35032381786497c287968/docs/updates.md).
+Reference: [firmware updates](https://github.com/cajui/cajui-firmware/blob/de9ddaa602faa6507a686a9f468d8f7377fd09dd/docs/updates.md).
 
 ## Unsupported capabilities
 

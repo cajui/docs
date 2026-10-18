@@ -48,7 +48,7 @@ das entidades segue o estado da receptora e as regras de expiração das mediç�
 Modelos adicionais de sensores exigem suporte no driver.
 
 As publicações e os templates de Discovery foram testados; a validação com uma instalação
-do Home Assistant em execução ainda está pendente. Consulte a [referência da integração](https://github.com/cajui/cajui-firmware/blob/a2ce332b2e3ff704f8e35032381786497c287968/docs/home-assistant.md)
+do Home Assistant em execução ainda está pendente. Consulte a [referência da integração](https://github.com/cajui/cajui-firmware/blob/de9ddaa602faa6507a686a9f468d8f7377fd09dd/docs/home-assistant.md)
 para definições de entidades, permissões de tópicos e tratamento de configurações retidas antigas.
 
 ## Contas e permissões
@@ -75,5 +75,5 @@ da identidade da amostra.
 
 ## Referências
 
-[Gestão MQTT](https://github.com/cajui/cajui-firmware/blob/a2ce332b2e3ff704f8e35032381786497c287968/docs/management-v1.md) ·
-[Configuração do broker no Central](https://github.com/cajui/cajui-central/blob/76a9a189d9a8101bc74b07f6723f9541f9acb05d/README.md) · [Garantias de entrega](data-flow.md)
+[Gestão MQTT](https://github.com/cajui/cajui-firmware/blob/de9ddaa602faa6507a686a9f468d8f7377fd09dd/docs/management-v1.md) ·
+[Configuração do broker no Central](https://github.com/cajui/cajui-central/blob/23ee539454c133fee42e020975e7d3dc662937e9/README.md) · [Garantias de entrega](data-flow.md)

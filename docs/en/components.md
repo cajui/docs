@@ -38,8 +38,8 @@ same electrical connections uses the same driver. Connector compatibility alone 
 not establish voltage compatibility, address availability or firmware support.
 
 The experimental Stick Lite profile assigns GPIO33 to SDA and GPIO34 to SCL, with
-GPIO35 reserved for the onboard LED. Refer to the [board guide](https://github.com/cajui/cajui-firmware/blob/a2ce332b2e3ff704f8e35032381786497c287968/docs/stick-lite.md)
-for wiring and power sequencing. The [reference applications](https://github.com/cajui/cajui-firmware/blob/a2ce332b2e3ff704f8e35032381786497c287968/docs/radio-applications.md)
+GPIO35 reserved for the onboard LED. Refer to the [board guide](https://github.com/cajui/cajui-firmware/blob/de9ddaa602faa6507a686a9f468d8f7377fd09dd/docs/stick-lite.md)
+for wiring and power sequencing. The [reference applications](https://github.com/cajui/cajui-firmware/blob/de9ddaa602faa6507a686a9f468d8f7377fd09dd/docs/radio-applications.md)
 document the DHT22 mapping and receiver configuration.
 
 ## Power and antennas

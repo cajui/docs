@@ -13,7 +13,7 @@ The current protocol does not implement LoRaWAN, mesh routing or TDMA scheduling
 Airtime, reporting intervals, antenna performance and interference determine practical
 capacity. Network IDs distinguish logical networks; radios on the same channel still
 share airtime. Configure frequency and transmit power for the deployment's region and
-antenna using the [radio application settings](https://github.com/cajui/cajui-firmware/blob/a2ce332b2e3ff704f8e35032381786497c287968/docs/radio-applications.md).
+antenna using the [radio application settings](https://github.com/cajui/cajui-firmware/blob/de9ddaa602faa6507a686a9f468d8f7377fd09dd/docs/radio-applications.md).
 
 ## Device identity and enrollment
 
@@ -41,7 +41,7 @@ sequenceDiagram
 ```
 
 This diagram summarizes the operator flow. Message formats, key derivation and state
-transitions are specified in the [pairing protocol](https://github.com/cajui/cajui-firmware/blob/a2ce332b2e3ff704f8e35032381786497c287968/docs/radio-pairing.md).
+transitions are specified in the [pairing protocol](https://github.com/cajui/cajui-firmware/blob/de9ddaa602faa6507a686a9f468d8f7377fd09dd/docs/radio-pairing.md).
 
 ## Protection mechanisms
 
@@ -67,5 +67,5 @@ Central registration or disabling an MQTT account affects different layers.
 
 ## References
 
-[Protocol](https://github.com/cajui/cajui-firmware/blob/a2ce332b2e3ff704f8e35032381786497c287968/docs/protocol-v1.md) · [Persistent state](https://github.com/cajui/cajui-firmware/blob/a2ce332b2e3ff704f8e35032381786497c287968/docs/persistence.md) ·
-[USB provisioning](https://github.com/cajui/cajui-firmware/blob/a2ce332b2e3ff704f8e35032381786497c287968/docs/provisioning.md) · [Security policy](https://github.com/cajui/cajui-firmware/blob/a2ce332b2e3ff704f8e35032381786497c287968/SECURITY.md)
+[Protocol](https://github.com/cajui/cajui-firmware/blob/de9ddaa602faa6507a686a9f468d8f7377fd09dd/docs/protocol-v1.md) · [Persistent state](https://github.com/cajui/cajui-firmware/blob/de9ddaa602faa6507a686a9f468d8f7377fd09dd/docs/persistence.md) ·
+[USB provisioning](https://github.com/cajui/cajui-firmware/blob/de9ddaa602faa6507a686a9f468d8f7377fd09dd/docs/provisioning.md) · [Security policy](https://github.com/cajui/cajui-firmware/blob/de9ddaa602faa6507a686a9f468d8f7377fd09dd/SECURITY.md)

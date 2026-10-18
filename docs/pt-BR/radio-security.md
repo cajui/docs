@@ -14,7 +14,7 @@ LoRaWAN, roteamento em malha nem agendamento TDMA.
 Tempo de ocupação do rádio, intervalos de envio, desempenho da antena e interferência
 determinam a capacidade prática. IDs de rede distinguem redes lógicas; rádios no mesmo
 canal continuam compartilhando o tempo de transmissão. Configure frequência e potência
-para a região e a antena da instalação usando as [configurações da aplicação de rádio](https://github.com/cajui/cajui-firmware/blob/a2ce332b2e3ff704f8e35032381786497c287968/docs/radio-applications.md).
+para a região e a antena da instalação usando as [configurações da aplicação de rádio](https://github.com/cajui/cajui-firmware/blob/de9ddaa602faa6507a686a9f468d8f7377fd09dd/docs/radio-applications.md).
 
 ## Identidade e vínculo dos dispositivos
 
@@ -42,7 +42,7 @@ sequenceDiagram
 ```
 
 O diagrama resume o fluxo do operador. Os formatos de mensagens, a derivação de chaves
-e as transições de estado estão definidos no [protocolo de pareamento](https://github.com/cajui/cajui-firmware/blob/a2ce332b2e3ff704f8e35032381786497c287968/docs/radio-pairing.md).
+e as transições de estado estão definidos no [protocolo de pareamento](https://github.com/cajui/cajui-firmware/blob/de9ddaa602faa6507a686a9f468d8f7377fd09dd/docs/radio-pairing.md).
 
 ## Mecanismos de proteção
 
@@ -69,5 +69,5 @@ rádio; remover um cadastro no Central ou desabilitar uma conta MQTT afeta outra
 
 ## Referências
 
-[Protocolo](https://github.com/cajui/cajui-firmware/blob/a2ce332b2e3ff704f8e35032381786497c287968/docs/protocol-v1.md) · [Estado persistente](https://github.com/cajui/cajui-firmware/blob/a2ce332b2e3ff704f8e35032381786497c287968/docs/persistence.md) ·
-[Provisionamento USB](https://github.com/cajui/cajui-firmware/blob/a2ce332b2e3ff704f8e35032381786497c287968/docs/provisioning.md) · [Política de segurança](https://github.com/cajui/cajui-firmware/blob/a2ce332b2e3ff704f8e35032381786497c287968/SECURITY.md)
+[Protocolo](https://github.com/cajui/cajui-firmware/blob/de9ddaa602faa6507a686a9f468d8f7377fd09dd/docs/protocol-v1.md) · [Estado persistente](https://github.com/cajui/cajui-firmware/blob/de9ddaa602faa6507a686a9f468d8f7377fd09dd/docs/persistence.md) ·
+[Provisionamento USB](https://github.com/cajui/cajui-firmware/blob/de9ddaa602faa6507a686a9f468d8f7377fd09dd/docs/provisioning.md) · [Política de segurança](https://github.com/cajui/cajui-firmware/blob/de9ddaa602faa6507a686a9f468d8f7377fd09dd/SECURITY.md)

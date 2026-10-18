@@ -25,9 +25,19 @@ Names are independent of radio identities and MQTT credentials. A sensor registr
 can contain several measurements, such as temperature and humidity.
 
 The dashboard supports named sections containing devices, complete sensors or individual
-measurements. Layout changes preserve registrations and history. Historical readings
-can be inspected and exported as CSV. The interface supports English and Brazilian
-Portuguese.
+measurements. Layout changes preserve registrations and history. History charts
+query stored readings by channel and date, with original rows available in a
+paginated table. CSV export covers recent overview readings only. The interface
+supports English and Brazilian Portuguese.
+
+## History
+
+Choose preset periods through 30 days or a custom interval of up to 366 days per
+query. Data has no automatic age-based deletion. History uses arrival at Central,
+not an inferred acquisition time for queued samples. Large charts retain selected
+original points; the paginated table exposes original readings, newest first.
+Back up the database before upgrades: schema migrations are not reversible by
+starting an older binary.
 
 ## Connection and measurement status
 
@@ -60,11 +70,11 @@ Broker configuration is supplied through environment variables and secret files.
 
 ## Access and scope
 
-The browser interface uses local-access restrictions and capability checks. Review the
-[access policy](https://github.com/cajui/cajui-central/blob/76a9a189d9a8101bc74b07f6723f9541f9acb05d/README.md) before exposing it beyond the local host.
+The browser interface uses local-access restrictions and capability checks. Keep the interface on the local computer and follow the
+[access policy](https://github.com/cajui/cajui-central/blob/23ee539454c133fee42e020975e7d3dc662937e9/README.md).
 Current functionality covers monitoring and supported device administration; actuator
 control and a general automation engine are not implemented.
 
 ## Reference
 
-[Central README](https://github.com/cajui/cajui-central/blob/76a9a189d9a8101bc74b07f6723f9541f9acb05d/README.md) · [API and interface source](https://github.com/cajui/cajui-central/tree/76a9a189d9a8101bc74b07f6723f9541f9acb05d/internal/httpapi)
+[Central README](https://github.com/cajui/cajui-central/blob/23ee539454c133fee42e020975e7d3dc662937e9/README.md) · [API and interface source](https://github.com/cajui/cajui-central/tree/23ee539454c133fee42e020975e7d3dc662937e9/internal/httpapi)

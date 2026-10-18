@@ -10,17 +10,17 @@ As funcionalidades suportadas e as limitações conhecidas estão listadas abaix
 
 ## Versões da documentação
 
-Esta documentação abrange as seguintes revisões de código, verificadas em 06/10/2026:
+Esta documentação abrange as seguintes revisões de código, verificadas em 17/10/2026:
 
 | Projeto | Revisão | Disponibilidade na atualização da documentação |
 | --- | --- | --- |
-| Cajuí Central | [`76a9a18`](https://github.com/cajui/cajui-central/tree/76a9a189d9a8101bc74b07f6723f9541f9acb05d) | Incluída pelo [PR #33](https://github.com/cajui/cajui-central/pull/33) integrado |
-| Cajuí Firmware | [`a2ce332`](https://github.com/cajui/cajui-firmware/tree/a2ce332b2e3ff704f8e35032381786497c287968) | Branch de desenvolvimento, [PR #25](https://github.com/cajui/cajui-firmware/pull/25) |
+| Cajuí Central | [`23ee539`](https://github.com/cajui/cajui-central/tree/23ee539454c133fee42e020975e7d3dc662937e9) | Branch main, incluindo histórico persistido do [PR #46](https://github.com/cajui/cajui-central/pull/46) |
+| Cajuí Firmware | [`de9ddaa`](https://github.com/cajui/cajui-firmware/tree/de9ddaa602faa6507a686a9f468d8f7377fd09dd) | Branch main; aplicações experimentais |
 
 Os links de referência técnica apontam para essas revisões. Imagens instaladas e
 releases publicadas podem conter um conjunto anterior de funcionalidades.
 
-O firmware de desenvolvimento adiciona o alvo Stick Lite/SHT4x, recuperação da busca
+A branch main inclui o alvo Stick Lite/SHT4x, recuperação da busca
 Wi-Fi, persistência independente das configurações de Wi-Fi verificadas e melhorias na
 recuperação MQTT. O alvo Stick Lite suporta instalação por USB e está fora dos artefatos
 de releases assinadas e instalação web nesta versão.
@@ -28,7 +28,6 @@ de releases assinadas e instalação web nesta versão.
 ## Rótulos de funcionalidades
 
 - **Implementado:** disponível na implementação documentada.
-- **Em desenvolvimento:** disponível na revisão de desenvolvimento do firmware acima.
 - **Validação pendente:** comportamento implementado com verificações físicas ou de integração em aberto.
 - **Não suportado:** fora da implementação atual.
 
@@ -67,14 +66,14 @@ firmware de desenvolvimento.
 
 | Assunto | Referência |
 | --- | --- |
-| Capacidades do firmware | [README](https://github.com/cajui/cajui-firmware/blob/a2ce332b2e3ff704f8e35032381786497c287968/README.md) |
-| Protocolo de rádio | [Especificação](https://github.com/cajui/cajui-firmware/blob/a2ce332b2e3ff704f8e35032381786497c287968/docs/protocol-v1.md) |
-| Máquina de estados de entrega | [Runtime](https://github.com/cajui/cajui-firmware/blob/a2ce332b2e3ff704f8e35032381786497c287968/docs/runtime.md) |
-| Registros duráveis e fila | [Persistência](https://github.com/cajui/cajui-firmware/blob/a2ce332b2e3ff704f8e35032381786497c287968/docs/persistence.md) |
-| Comportamento da placa e encaminhamento MQTT | [Aplicações](https://github.com/cajui/cajui-firmware/blob/a2ce332b2e3ff704f8e35032381786497c287968/docs/radio-applications.md) |
-| Stick Lite/SHT4x | [Guia da placa](https://github.com/cajui/cajui-firmware/blob/a2ce332b2e3ff704f8e35032381786497c287968/docs/stick-lite.md) |
-| Provisionamento e pareamento | [USB](https://github.com/cajui/cajui-firmware/blob/a2ce332b2e3ff704f8e35032381786497c287968/docs/provisioning.md), [rádio](https://github.com/cajui/cajui-firmware/blob/a2ce332b2e3ff704f8e35032381786497c287968/docs/radio-pairing.md) |
-| Gestão MQTT | [Contrato](https://github.com/cajui/cajui-firmware/blob/a2ce332b2e3ff704f8e35032381786497c287968/docs/management-v1.md) |
-| Home Assistant | [Integração](https://github.com/cajui/cajui-firmware/blob/a2ce332b2e3ff704f8e35032381786497c287968/docs/home-assistant.md) |
-| Instalação e atualizações | [Atualizações de firmware](https://github.com/cajui/cajui-firmware/blob/a2ce332b2e3ff704f8e35032381786497c287968/docs/updates.md) |
-| APIs e configuração do Central | [README do Central](https://github.com/cajui/cajui-central/blob/76a9a189d9a8101bc74b07f6723f9541f9acb05d/README.md) |
+| Capacidades do firmware | [README](https://github.com/cajui/cajui-firmware/blob/de9ddaa602faa6507a686a9f468d8f7377fd09dd/README.md) |
+| Protocolo de rádio | [Especificação](https://github.com/cajui/cajui-firmware/blob/de9ddaa602faa6507a686a9f468d8f7377fd09dd/docs/protocol-v1.md) |
+| Máquina de estados de entrega | [Runtime](https://github.com/cajui/cajui-firmware/blob/de9ddaa602faa6507a686a9f468d8f7377fd09dd/docs/runtime.md) |
+| Registros duráveis e fila | [Persistência](https://github.com/cajui/cajui-firmware/blob/de9ddaa602faa6507a686a9f468d8f7377fd09dd/docs/persistence.md) |
+| Comportamento da placa e encaminhamento MQTT | [Aplicações](https://github.com/cajui/cajui-firmware/blob/de9ddaa602faa6507a686a9f468d8f7377fd09dd/docs/radio-applications.md) |
+| Stick Lite/SHT4x | [Guia da placa](https://github.com/cajui/cajui-firmware/blob/de9ddaa602faa6507a686a9f468d8f7377fd09dd/docs/stick-lite.md) |
+| Provisionamento e pareamento | [USB](https://github.com/cajui/cajui-firmware/blob/de9ddaa602faa6507a686a9f468d8f7377fd09dd/docs/provisioning.md), [rádio](https://github.com/cajui/cajui-firmware/blob/de9ddaa602faa6507a686a9f468d8f7377fd09dd/docs/radio-pairing.md) |
+| Gestão MQTT | [Contrato](https://github.com/cajui/cajui-firmware/blob/de9ddaa602faa6507a686a9f468d8f7377fd09dd/docs/management-v1.md) |
+| Home Assistant | [Integração](https://github.com/cajui/cajui-firmware/blob/de9ddaa602faa6507a686a9f468d8f7377fd09dd/docs/home-assistant.md) |
+| Instalação e atualizações | [Atualizações de firmware](https://github.com/cajui/cajui-firmware/blob/de9ddaa602faa6507a686a9f468d8f7377fd09dd/docs/updates.md) |
+| APIs e configuração do Central | [README do Central](https://github.com/cajui/cajui-central/blob/23ee539454c133fee42e020975e7d3dc662937e9/README.md) |

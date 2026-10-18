@@ -26,8 +26,19 @@ Os nomes são independentes das identidades de rádio e das credenciais MQTT. Um
 de sensor pode conter várias medições, como temperatura e umidade.
 
 O painel suporta seções nomeadas com dispositivos, sensores completos ou medições
-individuais. Mudanças no arranjo preservam os cadastros e o histórico. Leituras históricas
-podem ser consultadas e exportadas em CSV. A interface suporta inglês e português brasileiro.
+individuais. Mudanças no arranjo preservam os cadastros e o histórico. Os gráficos
+consultam leituras armazenadas por canal e data, com as linhas originais em tabela
+paginada. O CSV cobre apenas leituras recentes da visão geral. A interface suporta
+inglês e português brasileiro.
+
+## Histórico
+
+Escolha períodos predefinidos de até 30 dias ou um intervalo personalizado de até
+366 dias por consulta. Os dados não são apagados automaticamente por idade. O
+histórico usa a chegada ao Central, sem inferir o horário de aquisição de amostras
+que ficaram em fila. Gráficos grandes selecionam pontos originais; a tabela
+paginada mostra leituras originais, mais recentes primeiro. Faça backup antes de
+atualizar: iniciar um binário antigo não desfaz as migrações do banco.
 
 ## Estado da conexão e das medições
 
@@ -63,11 +74,11 @@ de ambiente e arquivos de segredos.
 ## Acesso e escopo
 
 A interface do navegador usa restrições de acesso local e verificações de autorização
-por capacidade. Revise a [política de acesso](https://github.com/cajui/cajui-central/blob/76a9a189d9a8101bc74b07f6723f9541f9acb05d/README.md) antes de expô-la
-além da máquina local. A funcionalidade atual cobre monitoramento e a administração
+por capacidade. Mantenha a interface no computador local e siga a
+[política de acesso](https://github.com/cajui/cajui-central/blob/23ee539454c133fee42e020975e7d3dc662937e9/README.md). A funcionalidade atual cobre monitoramento e a administração
 suportada de dispositivos; controle de atuadores e um mecanismo geral de automação
 não estão implementados.
 
 ## Referência
 
-[README do Central](https://github.com/cajui/cajui-central/blob/76a9a189d9a8101bc74b07f6723f9541f9acb05d/README.md) · [Código da API e da interface](https://github.com/cajui/cajui-central/tree/76a9a189d9a8101bc74b07f6723f9541f9acb05d/internal/httpapi)
+[README do Central](https://github.com/cajui/cajui-central/blob/23ee539454c133fee42e020975e7d3dc662937e9/README.md) · [Código da API e da interface](https://github.com/cajui/cajui-central/tree/23ee539454c133fee42e020975e7d3dc662937e9/internal/httpapi)

@@ -37,7 +37,7 @@ API contracts and build instructions are maintained alongside their implementati
 | `src/board` and role entry points | ESP32 adapters and application integration |
 
 The portable core separates protocol decisions from board-specific drivers. See the
-[firmware module contract](https://github.com/cajui/cajui-firmware/blob/a2ce332b2e3ff704f8e35032381786497c287968/docs/runtime.md) for interfaces and lifetime requirements.
+[firmware module contract](https://github.com/cajui/cajui-firmware/blob/de9ddaa602faa6507a686a9f468d8f7377fd09dd/docs/runtime.md) for interfaces and lifetime requirements.
 
 ### Central
 
@@ -46,7 +46,7 @@ The portable core separates protocol decisions from board-specific drivers. See 
 APIs and the embedded interface. Locale sources live under `locales`, and browser tests
 under `tests/ui`. Brand and component references are maintained separately under `docs/brand`.
 
-See [Central development instructions](https://github.com/cajui/cajui-central/blob/76a9a189d9a8101bc74b07f6723f9541f9acb05d/README.md) for build and test commands.
+See [Central development instructions](https://github.com/cajui/cajui-central/blob/23ee539454c133fee42e020975e7d3dc662937e9/README.md) for build and test commands.
 
 ## Testing
 
@@ -60,7 +60,7 @@ tests. Home Assistant template tests verify configuration output without running
 Home Assistant instance.
 
 Test results and coverage apply to the revision and environment in which they were
-measured. See [firmware testing](https://github.com/cajui/cajui-firmware/blob/a2ce332b2e3ff704f8e35032381786497c287968/docs/testing.md) and [version coverage](status.md).
+measured. See [firmware testing](https://github.com/cajui/cajui-firmware/blob/de9ddaa602faa6507a686a9f468d8f7377fd09dd/docs/testing.md) and [version coverage](status.md).
 
 ## Documentation contributions
 

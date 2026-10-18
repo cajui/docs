@@ -47,7 +47,7 @@ and receiver diagnostics where available. Entity availability follows receiver s
 and measurement-expiry rules. Driver support is required for additional sensor models.
 
 Discovery publications and templates have been tested; validation against a running
-Home Assistant installation remains pending. See the [integration reference](https://github.com/cajui/cajui-firmware/blob/a2ce332b2e3ff704f8e35032381786497c287968/docs/home-assistant.md)
+Home Assistant installation remains pending. See the [integration reference](https://github.com/cajui/cajui-firmware/blob/de9ddaa602faa6507a686a9f468d8f7377fd09dd/docs/home-assistant.md)
 for entity definitions, topic permissions and handling of old retained configurations.
 
 ## Accounts and permissions
@@ -73,5 +73,5 @@ permits duplicate delivery, handled by Central through sample identity.
 
 ## References
 
-[MQTT management](https://github.com/cajui/cajui-firmware/blob/a2ce332b2e3ff704f8e35032381786497c287968/docs/management-v1.md) ·
-[Central broker configuration](https://github.com/cajui/cajui-central/blob/76a9a189d9a8101bc74b07f6723f9541f9acb05d/README.md) · [Delivery semantics](data-flow.md)
+[MQTT management](https://github.com/cajui/cajui-firmware/blob/de9ddaa602faa6507a686a9f468d8f7377fd09dd/docs/management-v1.md) ·
+[Central broker configuration](https://github.com/cajui/cajui-central/blob/23ee539454c133fee42e020975e7d3dc662937e9/README.md) · [Delivery semantics](data-flow.md)

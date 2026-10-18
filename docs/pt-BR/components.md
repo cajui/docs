@@ -40,8 +40,8 @@ conector, por si só, não garante tensão compatível, endereço disponível ou
 no firmware.
 
 O perfil experimental da Stick Lite usa GPIO33 para SDA e GPIO34 para SCL, reservando
-GPIO35 para o LED da placa. Consulte o [guia da placa](https://github.com/cajui/cajui-firmware/blob/a2ce332b2e3ff704f8e35032381786497c287968/docs/stick-lite.md) para
-fiação e sequência de alimentação. As [aplicações de referência](https://github.com/cajui/cajui-firmware/blob/a2ce332b2e3ff704f8e35032381786497c287968/docs/radio-applications.md)
+GPIO35 para o LED da placa. Consulte o [guia da placa](https://github.com/cajui/cajui-firmware/blob/de9ddaa602faa6507a686a9f468d8f7377fd09dd/docs/stick-lite.md) para
+fiação e sequência de alimentação. As [aplicações de referência](https://github.com/cajui/cajui-firmware/blob/de9ddaa602faa6507a686a9f468d8f7377fd09dd/docs/radio-applications.md)
 documentam a pinagem do DHT22 e a configuração da receptora.
 
 ## Alimentação e antenas

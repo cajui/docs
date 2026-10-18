@@ -43,7 +43,7 @@ update packages uploaded through its setup page and uses two application slots w
 rollback handling. Transmitters are updated over USB. The Stick Lite target is currently
 excluded from the signed/web release pipeline.
 
-Follow [firmware update instructions](https://github.com/cajui/cajui-firmware/blob/a2ce332b2e3ff704f8e35032381786497c287968/docs/updates.md) for image compatibility,
+Follow [firmware update instructions](https://github.com/cajui/cajui-firmware/blob/de9ddaa602faa6507a686a9f468d8f7377fd09dd/docs/updates.md) for image compatibility,
 partition layout and recovery procedures. A new-board installation initializes enrollment
 storage and must not be used as a routine update.
 
@@ -55,5 +55,5 @@ and closing setup should preserve an established MQTT connection on firmware sup
 the updated recovery behavior.
 
 Automated coverage and outstanding physical checks are documented in [project status](status.md).
-For detailed log fields, see [radio applications](https://github.com/cajui/cajui-firmware/blob/a2ce332b2e3ff704f8e35032381786497c287968/docs/radio-applications.md) and
-[Central operations](https://github.com/cajui/cajui-central/blob/76a9a189d9a8101bc74b07f6723f9541f9acb05d/README.md).
+For detailed log fields, see [radio applications](https://github.com/cajui/cajui-firmware/blob/de9ddaa602faa6507a686a9f468d8f7377fd09dd/docs/radio-applications.md) and
+[Central operations](https://github.com/cajui/cajui-central/blob/23ee539454c133fee42e020975e7d3dc662937e9/README.md).

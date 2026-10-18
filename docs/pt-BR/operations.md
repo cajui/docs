@@ -46,7 +46,7 @@ aceita pacotes de atualização assinados enviados pela página de configuraçã
 partições de aplicação com tratamento de rollback. Transmissores são atualizados por USB.
 O alvo Stick Lite está atualmente fora do fluxo de releases assinadas e instalação web.
 
-Siga as [instruções de atualização do firmware](https://github.com/cajui/cajui-firmware/blob/a2ce332b2e3ff704f8e35032381786497c287968/docs/updates.md) para compatibilidade
+Siga as [instruções de atualização do firmware](https://github.com/cajui/cajui-firmware/blob/de9ddaa602faa6507a686a9f468d8f7377fd09dd/docs/updates.md) para compatibilidade
 de imagens, organização das partições e procedimentos de recuperação. Uma instalação
 em placa nova inicializa o armazenamento dos vínculos e não deve ser usada como
 atualização de rotina.
@@ -60,5 +60,5 @@ MQTT estabelecida no firmware com o comportamento de recuperação atualizado.
 
 A cobertura automatizada e as verificações físicas pendentes estão documentadas no
 [estado do projeto](status.md). Para detalhes dos campos de log, consulte as
-[aplicações de rádio](https://github.com/cajui/cajui-firmware/blob/a2ce332b2e3ff704f8e35032381786497c287968/docs/radio-applications.md) e a
-[operação do Central](https://github.com/cajui/cajui-central/blob/76a9a189d9a8101bc74b07f6723f9541f9acb05d/README.md).
+[aplicações de rádio](https://github.com/cajui/cajui-firmware/blob/de9ddaa602faa6507a686a9f468d8f7377fd09dd/docs/radio-applications.md) e a
+[operação do Central](https://github.com/cajui/cajui-central/blob/23ee539454c133fee42e020975e7d3dc662937e9/README.md).

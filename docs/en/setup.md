@@ -19,7 +19,7 @@ installed over USB.
 
 ## 1. Start the broker and application
 
-Follow [Central's installation instructions](https://github.com/cajui/cajui-central/blob/76a9a189d9a8101bc74b07f6723f9541f9acb05d/README.md) for Docker or Go.
+Follow [Central's installation instructions](https://github.com/cajui/cajui-central/blob/23ee539454c133fee42e020975e7d3dc662937e9/README.md) for Docker or Go.
 The Docker deployment includes a broker; existing brokers can be used with the documented
 accounts and topic permissions. For a Home Assistant deployment, configure its MQTT
 integration using the [integration guide](mqtt-integrations.md).
@@ -30,8 +30,8 @@ Central's database health endpoint does not check MQTT connectivity.
 ## 2. Install firmware
 
 Build or select the correct image for each board and role. Follow the
-[installation and update instructions](https://github.com/cajui/cajui-firmware/blob/a2ce332b2e3ff704f8e35032381786497c287968/docs/updates.md) and
-[USB provisioning guide](https://github.com/cajui/cajui-firmware/blob/a2ce332b2e3ff704f8e35032381786497c287968/docs/provisioning.md).
+[installation and update instructions](https://github.com/cajui/cajui-firmware/blob/de9ddaa602faa6507a686a9f468d8f7377fd09dd/docs/updates.md) and
+[USB provisioning guide](https://github.com/cajui/cajui-firmware/blob/de9ddaa602faa6507a686a9f468d8f7377fd09dd/docs/provisioning.md).
 
 Use the new-board installation procedure only for an uninitialized board. Normal updates
 preserve the dedicated storage partition containing enrollment, counters and queued samples.
@@ -49,8 +49,8 @@ The broker address must be reachable from the receiver's network. An internal co
 hostname may only resolve inside Docker. mDNS search is available when the broker host
 advertises its service on the local network.
 
-Firmware with independent Wi-Fi persistence saves verified Wi-Fi settings before broker
-configuration. Earlier versions require complete uplink settings. Consult
+The documented main revision saves verified Wi-Fi settings before broker
+configuration. Older images may require complete uplink settings. Consult
 [version coverage](status.md) to determine which behavior applies.
 
 Central's receiver setup assistant provides connection details and verifies incoming
@@ -58,8 +58,8 @@ device state. A receiver becomes visible through its MQTT publications.
 
 ## 4. Enroll a transmitter
 
-Choose [USB enrollment](https://github.com/cajui/cajui-firmware/blob/a2ce332b2e3ff704f8e35032381786497c287968/docs/provisioning.md) or
-[radio pairing](https://github.com/cajui/cajui-firmware/blob/a2ce332b2e3ff704f8e35032381786497c287968/docs/radio-pairing.md). For radio pairing, open a receiver pairing
+Choose [USB enrollment](https://github.com/cajui/cajui-firmware/blob/de9ddaa602faa6507a686a9f468d8f7377fd09dd/docs/provisioning.md) or
+[radio pairing](https://github.com/cajui/cajui-firmware/blob/de9ddaa602faa6507a686a9f468d8f7377fd09dd/docs/radio-pairing.md). For radio pairing, open a receiver pairing
 window, request joining on the transmitter and approve the candidate identity.
 Central can initiate supported pairing actions through the receiver's MQTT management
 channel when the receiver is online.

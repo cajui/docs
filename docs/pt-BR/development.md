@@ -38,7 +38,7 @@ respectivas implementações.
 | `src/board` e pontos de entrada de cada função | Adaptadores ESP32 e integração da aplicação |
 
 O núcleo portável separa as decisões do protocolo dos drivers específicos da placa.
-Consulte o [contrato dos módulos do firmware](https://github.com/cajui/cajui-firmware/blob/a2ce332b2e3ff704f8e35032381786497c287968/docs/runtime.md) para conhecer
+Consulte o [contrato dos módulos do firmware](https://github.com/cajui/cajui-firmware/blob/de9ddaa602faa6507a686a9f468d8f7377fd09dd/docs/runtime.md) para conhecer
 as interfaces e os requisitos de tempo de vida dos objetos.
 
 ### Central
@@ -49,7 +49,7 @@ serve APIs e a interface incorporada. Os catálogos de idioma ficam em `locales`
 e os testes de navegador em `tests/ui`. As referências de marca e componentes são
 mantidas separadamente em `docs/brand`.
 
-Consulte as [instruções de desenvolvimento do Central](https://github.com/cajui/cajui-central/blob/76a9a189d9a8101bc74b07f6723f9541f9acb05d/README.md) para
+Consulte as [instruções de desenvolvimento do Central](https://github.com/cajui/cajui-central/blob/23ee539454c133fee42e020975e7d3dc662937e9/README.md) para
 os comandos de compilação e teste.
 
 ## Testes
@@ -65,7 +65,7 @@ integração MQTT e testes de navegador. Os testes de templates do Home Assistan
 verificam a configuração gerada sem executar uma instância completa do Home Assistant.
 
 Resultados e cobertura dos testes se aplicam à revisão e ao ambiente em que foram
-medidos. Consulte [testes do firmware](https://github.com/cajui/cajui-firmware/blob/a2ce332b2e3ff704f8e35032381786497c287968/docs/testing.md) e [versões documentadas](status.md).
+medidos. Consulte [testes do firmware](https://github.com/cajui/cajui-firmware/blob/de9ddaa602faa6507a686a9f468d8f7377fd09dd/docs/testing.md) e [versões documentadas](status.md).
 
 ## Contribuições à documentação
 
