@@ -2,16 +2,33 @@
 
 English | [Português brasileiro](README.pt-BR.md)
 
-**Build a wireless sensor network and follow its measurements locally.**
+**Build a low-power sensor network with ordinary LoRa boards, without a commercial gateway.**
 
-Cajuí connects sensors to a local monitoring application using LoRa radio boards.
-A transmitter reads a sensor, a receiver forwards the measurements to your network,
-and you view them in Cajuí Central or consume them with Home Assistant through MQTT.
+Cajuí is an open-source project for local sensor networks. Its goal is to connect
+different kinds of sensors, including several on the same transmitter, and collect
+their measurements through a receiver built from a single supported ESP32/LoRa
+board. You can follow the data in Cajuí Central or use MQTT with Home Assistant
+or your own application.
 
-A first setup can measure temperature and humidity in a greenhouse or storage room.
-The transmitter communicates by LoRa, so it does not need Wi-Fi at the measurement
-point. The receiver needs Wi-Fi and a computer running an MQTT broker. Local
-collection and monitoring do not require a cloud service.
+## Why Cajuí?
+
+- **A receiver you can build.** One supported LoRa board handles reception; no
+  commercial LoRaWAN gateway or network server is needed.
+- **Battery-powered measurement points.** Transmitters sleep between readings.
+  The design goal is months between charges for periodic measurements. Actual
+  autonomy still needs measurement and depends on the board, sensors, battery,
+  reporting interval and radio conditions.
+- **Room for different sensors.** Supporting several sensors per transmitter is
+  part of the project direction. Today's reference firmware reads one DHT22/AM2302
+  or SHT4x climate sensor per transmitter; additional types and combinations need
+  driver and application support.
+- **Local operation.** Only the receiver needs Wi-Fi. It forwards data to an MQTT
+  broker on your network, with no cloud subscription required for collection or
+  monitoring.
+
+Temperature and humidity are the first working example. The project is intended
+as a foundation for broader monitoring, such as soil moisture, water levels and
+rainfall, as support for those sensors is added.
 
 ```mermaid
 flowchart LR
@@ -35,7 +52,7 @@ been established for general deployment. See [status and compatibility](docs/en/
 
 | Part | What it does |
 | --- | --- |
-| Sensor | Measures a physical quantity. One SHT40 provides both temperature and humidity. |
+| Sensor | Measures a physical quantity and connects to a transmitter through a supported interface. |
 | Transmitter | Reads the sensor and sends measurements over LoRa. It can sleep between readings. |
 | Receiver | Accepts enrolled transmitters, acknowledges radio messages and forwards samples over Wi-Fi. |
 | MQTT broker | Routes messages to subscribed applications. Central's Docker setup includes one. |

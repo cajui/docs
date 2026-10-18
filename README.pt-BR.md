@@ -2,16 +2,33 @@
 
 [English](README.md) | Português brasileiro
 
-**Monte uma rede de sensores sem fio e acompanhe as medições localmente.**
+**Monte uma rede de sensores de baixo consumo com placas LoRa comuns, sem precisar de um gateway comercial.**
 
-O Cajuí conecta sensores a uma aplicação local de monitoramento usando placas de
-rádio LoRa. Um transmissor lê o sensor, uma receptora encaminha as medições à sua
-rede e você as consulta no Cajuí Central ou as consome com Home Assistant por MQTT.
+O Cajuí é um projeto open source para redes locais de sensores. A proposta é
+conectar diferentes tipos de sensor, inclusive vários no mesmo transmissor, e
+reunir suas medições em uma receptora feita com uma única placa ESP32/LoRa
+compatível. Você pode acompanhar os dados no Cajuí Central ou usar MQTT com o
+Home Assistant ou sua própria aplicação.
 
-Uma primeira montagem pode medir temperatura e umidade em uma estufa ou depósito.
-O transmissor usa LoRa, por isso não precisa de Wi-Fi no ponto de medição. A
-receptora precisa de Wi-Fi e de um computador executando um broker MQTT. A coleta
-e o monitoramento locais não exigem um serviço em nuvem.
+## Por que Cajuí?
+
+- **Uma receptora que você pode montar.** Uma placa LoRa compatível cuida da
+  recepção; não é necessário um gateway comercial ou servidor de rede LoRaWAN.
+- **Pontos de medição a bateria.** Os transmissores dormem entre leituras.
+  O objetivo é passar meses entre recargas em medições periódicas. A autonomia
+  real ainda precisa ser medida e depende da placa, dos sensores, da bateria,
+  do intervalo de envio e das condições do rádio.
+- **Espaço para diferentes sensores.** Atender vários sensores por transmissor
+  faz parte da direção do projeto. Hoje, o firmware de referência lê um sensor
+  de clima DHT22/AM2302 ou SHT4x por transmissor; outros tipos e combinações
+  precisam de suporte nos drivers e na aplicação.
+- **Operação local.** Apenas a receptora precisa de Wi-Fi. Ela encaminha os dados
+  a um broker MQTT na sua rede, sem exigir assinatura de nuvem para coleta ou
+  monitoramento.
+
+Temperatura e umidade são o primeiro exemplo em funcionamento. O projeto serve
+como base para ampliar o monitoramento, incluindo umidade do solo, nível de água
+ou chuva, conforme o suporte a esses sensores for adicionado.
 
 ```mermaid
 flowchart LR
@@ -36,7 +53,7 @@ não foram estabelecidos para instalações em geral. Consulte o
 
 | Parte | Função |
 | --- | --- |
-| Sensor | Mede uma grandeza física. Um SHT40 fornece temperatura e umidade. |
+| Sensor | Mede uma grandeza física e se conecta ao transmissor por uma interface compatível. |
 | Transmissor | Lê o sensor e envia medições por LoRa. Pode dormir entre leituras. |
 | Receptora | Aceita transmissores pareados, confirma mensagens de rádio e encaminha amostras por Wi-Fi. |
 | Broker MQTT | Distribui mensagens às aplicações inscritas. A instalação Docker do Central inclui um. |
