@@ -2,33 +2,24 @@
 
 English | [Português brasileiro](README.pt-BR.md)
 
-**Build a low-power sensor network with ordinary LoRa boards, without a commercial gateway.**
+**A wireless sensor network built from off-the-shelf ESP32/LoRa boards: battery-powered
+measurement points, a single board as the receiver, and your readings kept on your
+own computer.**
 
-Cajuí is an open-source project for local sensor networks. Its goal is to connect
-different kinds of sensors, including several on the same transmitter, and collect
-their measurements through a receiver built from a single supported ESP32/LoRa
-board. You can follow the data in Cajuí Central or use MQTT with Home Assistant
-or your own application.
+A Cajuí transmitter is a Heltec board with a sensor and a battery. Every five minutes
+it wakes up, reads the sensor, sends the measurement over LoRa and goes back to sleep.
+The receiver is another board from the same family, connected to Wi-Fi: it receives
+the measurements from every transmitter and hands them to an MQTT broker on your
+network. From there, Cajuí Central keeps the history and shows the dashboard, or
+Home Assistant consumes the data directly. Collection and monitoring stay on your
+network, with no cloud service involved.
 
-## Why Cajuí?
+The radio uses its own protocol, point to point between transmitters and the
+receiver. That is why one of these boards, running the Cajuí firmware, is enough to
+receive: there is no LoRaWAN gateway or network server in the path.
 
-- **A receiver you can build.** One supported LoRa board handles reception; no
-  commercial LoRaWAN gateway or network server is needed.
-- **Battery-powered measurement points.** Transmitters sleep between readings.
-  The design goal is months between charges for periodic measurements. Actual
-  autonomy still needs measurement and depends on the board, sensors, battery,
-  reporting interval and radio conditions.
-- **Room for different sensors.** Supporting several sensors per transmitter is
-  part of the project direction. Today's reference firmware reads one DHT22/AM2302
-  or SHT4x climate sensor per transmitter; additional types and combinations need
-  driver and application support.
-- **Local operation.** Only the receiver needs Wi-Fi. It forwards data to an MQTT
-  broker on your network, with no cloud subscription required for collection or
-  monitoring.
-
-Temperature and humidity are the first working example. The project is intended
-as a foundation for broader monitoring, such as soil moisture, water levels and
-rainfall, as support for those sensors is added.
+Today the reference firmware reads temperature and humidity (SHT4x or DHT22/AM2302)
+on two Heltec boards. It is the first complete example, from sensor to dashboard.
 
 ```mermaid
 flowchart LR
@@ -43,10 +34,24 @@ flowchart LR
 [Try Central](#try-the-dashboard-without-boards) · [Build a sensor link](#build-your-first-sensor-link) ·
 [Read the guides](#documentation) · [Contribute](#contributing)
 
-**Cajuí is experimental.** The reference applications currently support temperature
-and humidity sensors on specific Heltec boards. Assembly and firmware installation
-still require technical work. Range, battery life and network capacity have not
-been established for general deployment. See [status and compatibility](docs/en/status.md).
+**Cajuí is experimental.** Assembly and firmware installation still require
+technical work, and the limits in the next section apply to any installation.
+
+## Where the project is heading
+
+The architecture was designed for a general-purpose sensor network, not only for
+climate. Three goals guide development:
+
+- other sensor types, such as soil moisture, water level and rainfall;
+- several sensors on the same transmitter;
+- months of battery life between charges.
+
+None of the three is ready. Each transmitter reads one climate sensor; another
+sensor needs a driver and application support; real battery life has not been
+measured yet and depends on the board, sensor, battery and reporting interval.
+Range and network capacity have not been established either. The
+[project status](docs/en/status.md) separates what is implemented, what still needs
+validation and what does not exist yet.
 
 ## What each part does
 
@@ -59,11 +64,9 @@ been established for general deployment. See [status and compatibility](docs/en/
 | Cajuí Central | Stores readings, shows a dashboard and history, and helps diagnose devices. |
 | Home Assistant | An alternative consumer of the receiver's MQTT data; Central is optional. |
 
-The receiver is a supported ESP32/LoRa board running Cajuí firmware. The radio link
-uses a custom direct LoRa protocol, not LoRaWAN. A LoRaWAN gateway or network server
-is not required. Broker and Central can run on the same computer; they must remain
-running to receive and store new data. Central's current interface is restricted
-to the local computer because it has no user authentication.
+Broker and Central can run on the same computer; they must remain running to
+receive and store new data. Central's current interface is restricted to the local
+computer because it has no user authentication.
 
 ## Try the dashboard without boards
 

@@ -2,33 +2,23 @@
 
 [English](README.md) | Português brasileiro
 
-**Monte uma rede de sensores de baixo consumo com placas LoRa comuns, sem precisar de um gateway comercial.**
+**Rede de sensores sem fio feita com placas ESP32/LoRa de prateleira: pontos de
+medição a bateria, uma única placa como receptora e as medições guardadas no seu
+computador.**
 
-O Cajuí é um projeto open source para redes locais de sensores. A proposta é
-conectar diferentes tipos de sensor, inclusive vários no mesmo transmissor, e
-reunir suas medições em uma receptora feita com uma única placa ESP32/LoRa
-compatível. Você pode acompanhar os dados no Cajuí Central ou usar MQTT com o
-Home Assistant ou sua própria aplicação.
+Um transmissor Cajuí é uma placa Heltec com um sensor e uma bateria. A cada cinco
+minutos ele acorda, lê o sensor, envia a medição por LoRa e volta a dormir. A
+receptora é outra placa da mesma família, ligada ao Wi-Fi: recebe as medições de
+todos os transmissores e as entrega a um broker MQTT na sua rede. Dali, o Cajuí
+Central guarda o histórico e mostra o painel, ou o Home Assistant consome os dados
+diretamente. Coleta e monitoramento ficam na sua rede, sem serviço em nuvem.
 
-## Por que Cajuí?
+O rádio usa um protocolo próprio, ponto a ponto entre transmissores e receptora.
+Por isso basta uma placa dessas, rodando o firmware Cajuí, para receber: não há
+gateway nem servidor de rede LoRaWAN no caminho.
 
-- **Uma receptora que você pode montar.** Uma placa LoRa compatível cuida da
-  recepção; não é necessário um gateway comercial ou servidor de rede LoRaWAN.
-- **Pontos de medição a bateria.** Os transmissores dormem entre leituras.
-  O objetivo é passar meses entre recargas em medições periódicas. A autonomia
-  real ainda precisa ser medida e depende da placa, dos sensores, da bateria,
-  do intervalo de envio e das condições do rádio.
-- **Espaço para diferentes sensores.** Atender vários sensores por transmissor
-  faz parte da direção do projeto. Hoje, o firmware de referência lê um sensor
-  de clima DHT22/AM2302 ou SHT4x por transmissor; outros tipos e combinações
-  precisam de suporte nos drivers e na aplicação.
-- **Operação local.** Apenas a receptora precisa de Wi-Fi. Ela encaminha os dados
-  a um broker MQTT na sua rede, sem exigir assinatura de nuvem para coleta ou
-  monitoramento.
-
-Temperatura e umidade são o primeiro exemplo em funcionamento. O projeto serve
-como base para ampliar o monitoramento, incluindo umidade do solo, nível de água
-ou chuva, conforme o suporte a esses sensores for adicionado.
+Hoje o firmware de referência lê temperatura e umidade (SHT4x ou DHT22/AM2302) em
+duas placas Heltec. É o primeiro exemplo completo, do sensor ao painel.
 
 ```mermaid
 flowchart LR
@@ -43,11 +33,24 @@ flowchart LR
 [Experimente o Central](#experimente-o-painel-sem-placas) · [Monte um enlace de sensores](#monte-seu-primeiro-enlace-de-sensores) ·
 [Leia os guias](#documentação) · [Contribua](#contribuições)
 
-**O Cajuí é experimental.** As aplicações de referência atendem sensores de
-temperatura e umidade em placas Heltec específicas. Montagem e instalação do
-firmware ainda exigem trabalho técnico. Alcance, autonomia e capacidade da rede
-não foram estabelecidos para instalações em geral. Consulte o
-[estado e a compatibilidade](docs/pt-BR/status.md).
+**O Cajuí é experimental.** Montagem e instalação do firmware ainda exigem
+trabalho técnico, e os limites da próxima seção valem para qualquer instalação.
+
+## Para onde o projeto vai
+
+A arquitetura foi desenhada para uma rede de sensores de uso geral, não só para
+clima. Três objetivos orientam o desenvolvimento:
+
+- outros tipos de sensor, como umidade do solo, nível de água e chuva;
+- vários sensores no mesmo transmissor;
+- meses de bateria entre recargas.
+
+Nenhum dos três está pronto. Cada transmissor lê um sensor de clima; outro sensor
+exige driver e suporte na aplicação; a autonomia real ainda não foi medida e
+depende da placa, do sensor, da bateria e do intervalo de envio. Alcance e
+capacidade da rede também não foram estabelecidos. O
+[estado do projeto](docs/pt-BR/status.md) separa o que está implementado, o que
+falta validar e o que ainda não existe.
 
 ## O que cada parte faz
 
@@ -60,11 +63,9 @@ não foram estabelecidos para instalações em geral. Consulte o
 | Cajuí Central | Armazena leituras, apresenta painel e histórico e ajuda no diagnóstico dos dispositivos. |
 | Home Assistant | Consome os dados MQTT da receptora como alternativa; o Central é opcional. |
 
-A receptora é uma placa ESP32/LoRa compatível executando o firmware Cajuí. O enlace
-usa um protocolo próprio de LoRa direto, não LoRaWAN. Ele não exige gateway nem
-servidor de rede LoRaWAN. Broker e Central podem rodar no mesmo computador; precisam
-continuar ligados para receber e armazenar novos dados. A interface atual do Central
-é restrita ao computador local porque ainda não tem autenticação de usuários.
+Broker e Central podem rodar no mesmo computador; precisam continuar ligados para
+receber e armazenar novos dados. A interface atual do Central é restrita ao
+computador local porque ainda não tem autenticação de usuários.
 
 ## Experimente o painel sem placas
 
