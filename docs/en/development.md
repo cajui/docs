@@ -10,6 +10,7 @@ English | [Português brasileiro](../pt-BR/development.md)
 flowchart TB
     D[docs: ecosystem explanations] --> F[cajui-firmware: board applications and protocol]
     D --> C[cajui-central: ingestion and monitoring]
+    D --> H[cajui-hardware: 3D-printable enclosures]
     F --> FC[Portable C++ core and tests]
     F --> FA[ESP32 board adapters]
     C --> CB[Go domain, MQTT, HTTP and SQLite]
