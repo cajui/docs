@@ -109,6 +109,7 @@ in [radio and security](docs/en/radio-security.md) require a trusted setup envir
 | --- | --- |
 | [cajui-central](https://github.com/cajui/cajui-central) | Run the dashboard, work on the application, or integrate an HTTP/MQTT producer |
 | [cajui-firmware](https://github.com/cajui/cajui-firmware) | Install board firmware, add sensor support, or study the radio protocol |
+| [cajui-hardware](https://github.com/cajui/cajui-hardware) | Print an enclosure for a board, or adapt one to another board |
 | [docs](https://github.com/cajui/docs) | Understand the complete system, installation and operation |
 
 ## Documentation

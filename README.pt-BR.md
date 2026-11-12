@@ -109,6 +109,7 @@ um ambiente confiável para configuração.
 | --- | --- |
 | [cajui-central](https://github.com/cajui/cajui-central) | Executar o painel, trabalhar na aplicação ou integrar um produtor HTTP/MQTT |
 | [cajui-firmware](https://github.com/cajui/cajui-firmware) | Instalar o firmware, adicionar suporte a sensores ou estudar o protocolo de rádio |
+| [cajui-hardware](https://github.com/cajui/cajui-hardware) | Imprimir uma caixa para uma placa ou adaptá-la a outra placa |
 | [docs](https://github.com/cajui/docs) | Entender o conjunto, a instalação e a operação |
 
 ## Documentação

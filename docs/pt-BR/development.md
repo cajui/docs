@@ -10,6 +10,7 @@
 flowchart TB
     D[docs: documentação do ecossistema] --> F[cajui-firmware: aplicações das placas e protocolo]
     D --> C[cajui-central: ingestão e monitoramento]
+    D --> H[cajui-hardware: caixas impressas em 3D]
     F --> FC[Núcleo C++ portável e testes]
     F --> FA[Adaptadores das placas ESP32]
     C --> CB[Domínio em Go, MQTT, HTTP e SQLite]
