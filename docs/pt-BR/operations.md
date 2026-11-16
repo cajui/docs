@@ -16,7 +16,7 @@ antes de alterar a configuração.
 | Erro de sensor com ACK de rádio bem-sucedido | Alimentação, fiação e driver do sensor | A qualidade da medição é independente da entrega por rádio |
 | Sem ACK de rádio | Antenas, perfil, vínculo e integridade do armazenamento | A receptora pode aceitar amostras enquanto o MQTT está indisponível |
 | Wi-Fi conectado, mas a aplicação não recebe dados | Endereço do broker, credenciais, ACLs e assinaturas | Wi-Fi e MQTT têm estados de conexão separados |
-| Busca do broker sem resultados | Anúncio mDNS e alcance do multicast | Há suporte à entrada manual do endereço |
+| Busca do broker sem resultados | Receptora e broker na mesma sub-rede; anúncio mDNS para firmware sem a busca por endereço | Há suporte à entrada manual do endereço |
 | Fila da receptora cresce | Conexão com o broker e processamento de PUBACKs | A fila é limitada; confira os contadores de amostras descartadas |
 | Fila esvazia sem leituras no consumidor | Permissões de tópicos, identidade e logs do consumidor | O MQTT 3.1.1 pode confirmar publicações negadas |
 | Estado desconectado demora após falta de energia | Keepalive MQTT e Last Will | A detecção de desconexão depende do timeout do broker |

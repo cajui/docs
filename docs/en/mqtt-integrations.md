@@ -26,14 +26,18 @@ can publish telemetry but disables Discovery publication.
 
 ## Broker discovery
 
-The receiver can search the local network for an mDNS `_mqtt._tcp` announcement.
-Discovery supplies the broker address and port; authentication requires separately
-configured credentials.
+The receiver's setup page lists brokers found in two ways: an mDNS `_mqtt._tcp`
+announcement and, from firmware revision `47a6a65`, a search of the broker port on the
+addresses of its own subnet. Discovery supplies the broker address and port;
+authentication requires separately configured credentials. In operation, a receiver
+that loses its broker for two minutes searches its subnet again with the stored
+credentials; see [forwarding to MQTT](https://github.com/cajui/cajui-firmware/blob/47a6a652e788f99d3d6406dae837ba99223fe036/docs/radio-applications.md#forwarding-to-mqtt).
 
-The broker host must advertise the service on a network reachable by the receiver.
-On Docker Desktop, run the project's announcement helper on the host because container
-multicast is not automatically exposed to the LAN. Manual address entry is available
-when multicast discovery is unavailable.
+A broker on another subnet is not found by the address search. For mDNS, the broker
+host must advertise the service on a network reachable by the receiver; on Docker
+Desktop, run the project's announcement helper on the host because container multicast
+is not automatically exposed to the LAN. Manual address entry is available when neither
+method finds the broker.
 
 ## Home Assistant
 

@@ -26,14 +26,18 @@ com ponto pode publicar telemetria, mas desabilita a publicação de Discovery.
 
 ## Descoberta do broker
 
-A receptora pode buscar um anúncio mDNS `_mqtt._tcp` na rede local. A descoberta
-fornece o endereço e a porta do broker; a autenticação exige credenciais configuradas
-separadamente.
+A página de configuração da receptora lista os brokers encontrados de duas formas: um
+anúncio mDNS `_mqtt._tcp` e, a partir da revisão `47a6a65` do firmware, uma busca da
+porta do broker nos endereços da própria sub-rede. A descoberta fornece o endereço e a
+porta do broker; a autenticação exige credenciais configuradas separadamente. Em
+operação, uma receptora que perde o broker por dois minutos procura de novo na sub-rede
+com as credenciais salvas; consulte o [encaminhamento ao MQTT](https://github.com/cajui/cajui-firmware/blob/47a6a652e788f99d3d6406dae837ba99223fe036/docs/radio-applications.md#forwarding-to-mqtt).
 
-A máquina do broker precisa anunciar o serviço em uma rede alcançável pela receptora.
-No Docker Desktop, execute o script de anúncio do projeto na máquina hospedeira, pois
-o multicast do contêiner não é exposto automaticamente à rede local. A entrada manual
-de endereço está disponível quando a descoberta por multicast não funciona.
+A busca por endereço não encontra um broker em outra sub-rede. Para o mDNS, a máquina
+do broker precisa anunciar o serviço em uma rede alcançável pela receptora; no Docker
+Desktop, execute o script de anúncio do projeto na máquina hospedeira, pois o multicast
+do contêiner não é exposto automaticamente à rede local. A entrada manual de endereço
+está disponível quando nenhum dos dois métodos encontra o broker.
 
 ## Home Assistant
 
