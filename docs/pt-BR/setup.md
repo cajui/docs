@@ -67,7 +67,7 @@ No Central, abra **Equipamentos → Receptores → Adicionar receptor** e siga a
 1. **Conectar ao receptor.** Segure o botão PRG da receptora por três segundos, conecte
    o celular à rede Wi-Fi `Cajui-XXXX` dela e abra `http://192.168.4.1`. Escolha sua rede
    de 2,4 GHz e salve a senha. Toque em **Refresh** até o estado mostrar
-   **Wi-Fi: connected** e **Wi-Fi settings: saved**.
+   **Wi-Fi: connected to** e o nome da sua rede, e **Wi-Fi settings: saved**.
 2. **Dados de conexão.** Quando o Wi-Fi conecta, a receptora procura brokers na rede, o
    que leva até cerca de um minuto. Toque em **Refresh** até a seção **MQTT broker** da
    página listar um broker e escolha-o; se aparecer mais de um, use o do computador do
@@ -104,7 +104,7 @@ página da receptora é em inglês:
 | --- | --- |
 | **Wi-Fi: could not connect** | Nome e senha da rede, com pelo menos oito caracteres; a rede precisa oferecer 2,4 GHz |
 | Nenhum broker na seção **MQTT broker** depois da busca | Receptora e Central na mesma sub-rede, e o broker na porta 1883. Se não, informe o endereço do computador na rede local e a porta |
-| **Wi-Fi: connected** com **Broker: offline** | Endereço, porta, usuário e senha; receptora e Central na mesma rede. No computador do Central, `docker compose logs broker` mostra se as tentativas de conexão chegam ao broker |
+| **Wi-Fi: connected to** e o nome da sua rede, com **Broker: offline** | Endereço, porta, usuário e senha; receptora e Central na mesma rede. No computador do Central, `docker compose logs broker` mostra se as tentativas de conexão chegam ao broker |
 | **Broker: online**, mas o assistente não lista nada | O assistente lista as receptoras que se conectam depois de ele abrir. Uma que já estava conectada aparece em **Equipamentos → Receptores** |
 
 ## 4. Pareie um transmissor

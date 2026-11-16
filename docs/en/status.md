@@ -21,7 +21,7 @@ Technical reference links target these revisions. Installed images and published
 may contain an earlier feature set.
 
 The installation guides, [with Central](setup.md) and [without Central](setup-without-central.md),
-and the [MQTT integration](mqtt-integrations.md) and [operations](operations.md) pages
+and the [MQTT and integrations](mqtt-integrations.md) and [operations](operations.md) pages
 were checked on 2026-11-16 against Central
 [`05f58ba`](https://github.com/cajui/cajui-central/tree/05f58ba12b6c2542018f9cbc7ee2d913b4e4a27f) and firmware
 [`47a6a65`](https://github.com/cajui/cajui-firmware/tree/47a6a652e788f99d3d6406dae837ba99223fe036).

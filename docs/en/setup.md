@@ -69,7 +69,7 @@ In Central, open **Equipment → Receivers → Add receiver** and follow its thr
 1. **Connect to receiver.** Hold the receiver's PRG button for three seconds, join
    its `Cajui-XXXX` Wi-Fi network from the phone and open `http://192.168.4.1`. Choose
    your 2.4 GHz network and save its password. Tap **Refresh** until the status shows
-   **Wi-Fi: connected** and **Wi-Fi settings: saved**.
+   **Wi-Fi: connected to** your network and **Wi-Fi settings: saved**.
 2. **Connection details.** Once Wi-Fi connects, the receiver searches the network for
    brokers, which takes up to about a minute. Tap **Refresh** until the page's
    **MQTT broker** section lists a broker, and choose it; if more than one appears, use
@@ -103,7 +103,7 @@ If the receiver does not appear, the page's status lines tell Wi-Fi and broker a
 | --- | --- |
 | **Wi-Fi: could not connect** | Network name and password, of at least eight characters; the network must offer 2.4 GHz |
 | No broker in the **MQTT broker** section after the search | Receiver and Central on the same subnet, and the broker on port 1883. Otherwise enter the computer's LAN address and port |
-| **Wi-Fi: connected** with **Broker: offline** | Address, port, username and password; receiver and Central on the same network. On the Central computer, `docker compose logs broker` shows whether connection attempts reach the broker |
+| **Wi-Fi: connected to** your network, with **Broker: offline** | Address, port, username and password; receiver and Central on the same network. On the Central computer, `docker compose logs broker` shows whether connection attempts reach the broker |
 | **Broker: online**, but the assistant lists nothing | The assistant lists receivers that connect after it opened. One already online appears in **Equipment → Receivers** |
 
 ## 4. Pair a transmitter
