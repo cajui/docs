@@ -20,6 +20,11 @@ This documentation covers the following source revisions, checked on 2026-10-17:
 Technical reference links target these revisions. Installed images and published releases
 may contain an earlier feature set.
 
+The [installation guides](setup.md) were checked on 2026-11-16 against Central
+[`{CENTRAL}`](https://github.com/cajui/cajui-central/tree/{CENTRAL}) and firmware
+[`47a6a65`](https://github.com/cajui/cajui-firmware/tree/47a6a652e788f99d3d6406dae837ba99223fe036),
+which add the receiver's broker search. Published firmware releases do not include it.
+
 The main branch includes the Stick Lite/SHT4x target, Wi-Fi scan recovery,
 independent persistence of verified Wi-Fi settings and MQTT recovery improvements.
 The Stick Lite target supports USB installation and is excluded from signed/web release
