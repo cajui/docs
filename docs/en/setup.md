@@ -62,8 +62,8 @@ In Central, open **Equipment → Receivers → Add receiver** and follow its thr
    its `Cajui-XXXX` Wi-Fi network from the phone and open `http://192.168.4.1`. Choose
    your 2.4 GHz network and save its password. The page reports Wi-Fi connected and the
    settings saved.
-2. **Connection details.** In the page's **MQTT broker** section, choose **Use** next to
-   the broker found on the network. If more than one appears, use the computer running
+2. **Connection details.** In the page's **MQTT broker** section, choose the broker
+   found on the network. If more than one appears, use the computer running
    Central. Enter the username and password shown by the assistant and save. The page
    reports **Broker: online**.
 3. **Find the receiver.** The assistant lists the receiver when it connects. Confirm it.
@@ -79,9 +79,9 @@ Before relying on the setup page, note how it works:
 - Choosing another Wi-Fi network clears the saved broker settings, so that the password
   is never sent to a broker on an unknown network. Choose the broker and enter the
   credentials again.
-- The list shows brokers that answer on the receiver's subnet. It does not need Central's
-  mDNS announcement helper. Firmware older than the broker search shows no list: enter the
-  computer's LAN address instead.
+- The list shows brokers that answer on port 1883 of the receiver's subnet, without
+  Central's mDNS announcement helper. Older firmware lists only brokers announced through
+  mDNS. If the broker is not listed, enter the computer's LAN address.
 
 If the receiver does not appear, the page's status lines tell Wi-Fi and broker apart:
 

@@ -62,8 +62,8 @@ No Central, abra **Equipamentos → Receptores → Adicionar receptor** e siga a
 1. **Conectar ao receptor.** Segure o botão PRG da receptora por três segundos, conecte
    o celular à rede Wi-Fi `Cajui-XXXX` dela e abra `http://192.168.4.1`. Escolha sua rede
    de 2,4 GHz e salve a senha. A página informa o Wi-Fi conectado e as configurações salvas.
-2. **Dados de conexão.** Na seção **MQTT broker** da página, toque em **Use** ao lado do
-   broker encontrado na rede. Se aparecer mais de um, use o do computador do Central.
+2. **Dados de conexão.** Na seção **MQTT broker** da página, escolha o broker encontrado
+   na rede. Se aparecer mais de um, use o do computador do Central.
    Preencha o usuário e a senha mostrados pelo assistente e salve. A página informa
    **Broker: online**.
 3. **Encontrar receptor.** O assistente lista a receptora quando ela se conecta. Confirme-a.
@@ -79,9 +79,10 @@ Antes de depender da página de configuração, saiba como ela funciona:
 - Escolher outra rede Wi-Fi apaga as configurações do broker salvas, para que a senha
   nunca seja enviada a um broker numa rede desconhecida. Escolha o broker e informe as
   credenciais de novo.
-- A lista mostra os brokers que respondem na sub-rede da receptora. Ela não depende do
-  anúncio por mDNS do Central. Firmware anterior à busca do broker não mostra a lista:
-  informe o endereço do computador na rede local.
+- A lista mostra os brokers que respondem na porta 1883 da sub-rede da receptora, sem
+  depender do anúncio por mDNS do Central. Firmware mais antigo lista só os brokers
+  anunciados por mDNS. Se o broker não aparecer, informe o endereço do computador na
+  rede local.
 
 Se a receptora não aparecer, as linhas de estado da página separam Wi-Fi e broker:
 
