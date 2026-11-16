@@ -21,7 +21,7 @@ Os links de referência técnica apontam para essas revisões. Imagens instalada
 releases publicadas podem conter um conjunto anterior de funcionalidades.
 
 Os [guias de instalação](setup.md) foram verificados em 16/11/2026 com o Central
-[`{CENTRAL}`](https://github.com/cajui/cajui-central/tree/{CENTRAL}) e o firmware
+[`05f58ba`](https://github.com/cajui/cajui-central/tree/05f58ba12b6c2542018f9cbc7ee2d913b4e4a27f) e o firmware
 [`47a6a65`](https://github.com/cajui/cajui-firmware/tree/47a6a652e788f99d3d6406dae837ba99223fe036),
 que acrescentam a busca do broker pela receptora. As releases publicadas do firmware não a incluem.
 

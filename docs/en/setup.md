@@ -25,15 +25,15 @@ selecting firmware.
 
 ## 1. Start Central
 
-Follow [Central's Docker installation](https://github.com/cajui/cajui-central/blob/{CENTRAL}/docs/installation.md#docker)
+Follow [Central's Docker installation](https://github.com/cajui/cajui-central/blob/05f58ba12b6c2542018f9cbc7ee2d913b4e4a27f/docs/installation.md#docker)
 and open http://127.0.0.1:8080 on the computer running it. The dashboard has no login,
 so it only opens on that computer. On a server without a screen, open it from another
 computer through an
-[SSH local port forward](https://github.com/cajui/cajui-central/blob/{CENTRAL}/docs/installation.md#server-without-a-screen).
+[SSH local port forward](https://github.com/cajui/cajui-central/blob/05f58ba12b6c2542018f9cbc7ee2d913b4e4a27f/docs/installation.md#server-without-a-screen).
 
 Optionally, set `CAJUI_RECEIVER_HOST` to the computer's LAN address so the receiver
 assistant shows it; see
-[broker address for receivers](https://github.com/cajui/cajui-central/blob/{CENTRAL}/docs/installation.md#broker-address-for-receivers).
+[broker address for receivers](https://github.com/cajui/cajui-central/blob/05f58ba12b6c2542018f9cbc7ee2d913b4e4a27f/docs/installation.md#broker-address-for-receivers).
 
 **Expected result:** the dashboard opens, and **System → MQTT broker** shows Central
 connected to the broker.

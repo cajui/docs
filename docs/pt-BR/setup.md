@@ -25,14 +25,14 @@ antes de selecionar o firmware.
 
 ## 1. Inicie o Central
 
-Siga a [instalação do Central com Docker](https://github.com/cajui/cajui-central/blob/{CENTRAL}/docs/installation.md#docker)
+Siga a [instalação do Central com Docker](https://github.com/cajui/cajui-central/blob/05f58ba12b6c2542018f9cbc7ee2d913b4e4a27f/docs/installation.md#docker)
 e abra http://127.0.0.1:8080 no computador onde ele roda. O painel não tem login, por
 isso só abre nesse computador. Num servidor sem tela, abra-o de outro computador por um
-[encaminhamento local de porta pelo SSH](https://github.com/cajui/cajui-central/blob/{CENTRAL}/docs/installation.md#server-without-a-screen).
+[encaminhamento local de porta pelo SSH](https://github.com/cajui/cajui-central/blob/05f58ba12b6c2542018f9cbc7ee2d913b4e4a27f/docs/installation.md#server-without-a-screen).
 
 Se quiser, defina `CAJUI_RECEIVER_HOST` com o endereço do computador na rede local para
 o assistente da receptora mostrá-lo; consulte o
-[endereço do broker para receptoras](https://github.com/cajui/cajui-central/blob/{CENTRAL}/docs/installation.md#broker-address-for-receivers).
+[endereço do broker para receptoras](https://github.com/cajui/cajui-central/blob/05f58ba12b6c2542018f9cbc7ee2d913b4e4a27f/docs/installation.md#broker-address-for-receivers).
 
 **Resultado esperado:** o painel abre, e **Sistema → Broker MQTT** mostra o Central
 conectado ao broker.
