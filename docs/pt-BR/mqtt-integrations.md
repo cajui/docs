@@ -27,11 +27,16 @@ com ponto pode publicar telemetria, mas desabilita a publicação de Discovery.
 ## Descoberta do broker
 
 A página de configuração da receptora lista os brokers encontrados de duas formas: um
-anúncio mDNS `_mqtt._tcp` e, a partir da revisão `47a6a65` do firmware, uma busca da
-porta do broker nos endereços da própria sub-rede. A descoberta fornece o endereço e a
-porta do broker; a autenticação exige credenciais configuradas separadamente. Em
-operação, uma receptora que perde o broker por dois minutos procura de novo na sub-rede
-com as credenciais salvas; consulte o [encaminhamento ao MQTT](https://github.com/cajui/cajui-firmware/blob/47a6a652e788f99d3d6406dae837ba99223fe036/docs/radio-applications.md#forwarding-to-mqtt).
+anúncio mDNS `_mqtt._tcp` e, a partir da revisão
+[`47a6a65`](https://github.com/cajui/cajui-firmware/tree/47a6a652e788f99d3d6406dae837ba99223fe036)
+do firmware, uma busca da porta do broker nos endereços da própria sub-rede. A
+descoberta fornece o endereço e a porta do broker; a autenticação exige credenciais
+configuradas separadamente. Em operação, uma receptora que perde o broker por dois
+minutos procura de novo na sub-rede com as credenciais salvas; consulte o
+[encaminhamento ao MQTT](https://github.com/cajui/cajui-firmware/blob/47a6a652e788f99d3d6406dae837ba99223fe036/docs/radio-applications.md#forwarding-to-mqtt).
+Essa busca envia a senha salva a qualquer máquina da sub-rede que responda na porta do
+broker e exija senha; por isso a exigência de rede confiável em
+[rádio e segurança](radio-security.md) vale para todos os computadores da rede da receptora.
 
 A busca por endereço não encontra um broker em outra sub-rede. Para o mDNS, a máquina
 do broker precisa anunciar o serviço em uma rede alcançável pela receptora; no Docker

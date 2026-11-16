@@ -27,13 +27,15 @@ Siga a etapa 2 do [guia de instalação](setup.md#2-instale-o-firmware).
 1. Segure o botão PRG da receptora por três segundos para abrir a configuração.
 2. Entre na rede Wi-Fi temporária dela e abra `http://192.168.4.1`.
 3. Selecione uma rede de 2,4 GHz ou informe um SSID oculto e suas credenciais.
-4. Na seção **MQTT broker**, escolha um broker encontrado na rede ou informe o endereço,
-   depois a porta e as credenciais de produtor.
-5. Confirme os estados de conexão do Wi-Fi e do broker.
+4. Quando o Wi-Fi conectar, toque em **Refresh** até a busca terminar, o que leva até
+   cerca de um minuto. Na seção **MQTT broker**, escolha um broker encontrado na rede ou
+   informe o endereço, depois a porta e as credenciais de produtor, e salve.
+5. Toque em **Refresh** até o estado mostrar o Wi-Fi conectado e **Broker: online**.
 
 O endereço do broker deve ser alcançável pela rede da receptora. Um nome de contêiner
-interno pode resolver apenas dentro do Docker. A receptora lista os brokers que
-respondem na própria sub-rede e os anunciados por mDNS.
+interno pode resolver apenas dentro do Docker. A receptora lista os brokers anunciados
+por mDNS e os que respondem na porta 1883, ou na porta já informada, na própria
+sub-rede; consulte as observações da [instalação](setup.md#3-adicione-a-receptora).
 
 **Resultado esperado:** a página informa **Broker: online**.
 

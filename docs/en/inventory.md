@@ -48,7 +48,7 @@ References: [protocol](https://github.com/cajui/cajui-firmware/blob/de9ddaa602fa
 | Network selector and scan recovery | Implemented | Bounded scan retries and manual hidden-network entry |
 | Independent Wi-Fi persistence | Implemented | Saves verified Wi-Fi before MQTT configuration |
 | MQTT recovery after Wi-Fi trials | Implemented | Restores suspended connections with bounded retries |
-| Broker discovery | Implemented | mDNS address discovery with a host announcement |
+| Broker discovery | Implemented | mDNS address discovery with a host announcement; from `47a6a65`, also a search of the broker port on the receiver's subnet |
 | Availability and device state | Implemented | Retained MQTT state and receiver Last Will |
 | MQTT pairing and revocation commands | Implemented | Available to authorized clients through the management channel |
 | Home Assistant MQTT Discovery | Implemented; integration validation pending | Publishes supported entity definitions |
