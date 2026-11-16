@@ -92,8 +92,9 @@ Start with one receiver and one transmitter:
 | Monitoring | A computer running Central, or an existing Home Assistant installation with MQTT |
 
 1. Check [board compatibility and wiring](docs/en/components.md).
-2. Follow [installation](docs/en/setup.md): prepare the broker, install the correct
-   firmware, configure receiver networking and enroll the transmitter.
+2. Follow [installation](docs/en/setup.md): start Central, install the correct firmware,
+   add the receiver and pair the transmitter. Without Central, follow
+   [installation without Central](docs/en/setup-without-central.md).
 3. Confirm that a reading reaches the application, then name the device and sensor.
 4. Check reception and recovery at the intended location using the
    [operations guide](docs/en/operations.md).
@@ -118,7 +119,8 @@ in [radio and security](docs/en/radio-security.md) require a trusted setup envir
 | --- | --- |
 | [Architecture](docs/en/overview.md) | Topology, services and the path of a measurement |
 | [Components](docs/en/components.md) | Boards, power, antennas and sensor interfaces |
-| [Installation](docs/en/setup.md) | From firmware and broker setup to the first reading |
+| [Installation](docs/en/setup.md) | From Central and firmware to the first reading |
+| [Installation without Central](docs/en/setup-without-central.md) | Home Assistant, an existing broker or USB configuration |
 | [Cajuí Central](docs/en/central.md) | Dashboard, history, registration and device status |
 | [MQTT and integrations](docs/en/mqtt-integrations.md) | Broker permissions, Home Assistant and discovery |
 | [Operations](docs/en/operations.md) | Diagnose missing readings, update and recover |

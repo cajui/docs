@@ -15,7 +15,7 @@ application ingestion. Check each stage's status before changing configuration.
 | Sensor error with successful radio ACK | Sensor power, wiring and driver | Measurement quality is independent of radio delivery |
 | No radio ACK | Antennas, profile, enrollment and storage health | Receiver acceptance can operate while MQTT is unavailable |
 | Wi-Fi connected but application receives nothing | Broker address, credentials, ACLs and subscriptions | Wi-Fi and MQTT have separate connection states |
-| Broker search returns no results | mDNS announcement and multicast reachability | Manual address entry is supported |
+| Broker search returns no results | Receiver and broker on the same subnet; mDNS announcement for firmware without the address search | Manual address entry is supported |
 | Receiver queue grows | Broker connection and PUBACK processing | The queue is bounded; inspect dropped-sample counters |
 | Queue drains without consumer readings | Topic permissions, identity and consumer logs | MQTT 3.1.1 can acknowledge denied publications |
 | Offline status is delayed after power loss | MQTT keepalive and Last Will | Offline detection follows the broker's timeout |

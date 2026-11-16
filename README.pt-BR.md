@@ -92,8 +92,9 @@ Comece com uma receptora e um transmissor:
 | Monitoramento | Computador executando o Central ou uma instalação existente do Home Assistant com MQTT |
 
 1. Confira a [compatibilidade e a ligação das placas](docs/pt-BR/components.md).
-2. Siga a [instalação](docs/pt-BR/setup.md): prepare o broker, instale o firmware
-   correto, configure a rede da receptora e cadastre o transmissor.
+2. Siga a [instalação](docs/pt-BR/setup.md): inicie o Central, instale o firmware
+   correto, adicione a receptora e pareie o transmissor. Sem o Central, siga a
+   [instalação sem o Central](docs/pt-BR/setup-without-central.md).
 3. Confirme a chegada de uma leitura à aplicação e nomeie o dispositivo e o sensor.
 4. Confira recepção e recuperação no local de uso com o [guia de operação](docs/pt-BR/operations.md).
 
@@ -118,7 +119,8 @@ um ambiente confiável para configuração.
 | --- | --- |
 | [Arquitetura](docs/pt-BR/overview.md) | Topologia, serviços e caminho de uma medição |
 | [Componentes](docs/pt-BR/components.md) | Placas, alimentação, antenas e interfaces dos sensores |
-| [Instalação](docs/pt-BR/setup.md) | Do firmware e broker à primeira leitura |
+| [Instalação](docs/pt-BR/setup.md) | Do Central e do firmware à primeira leitura |
+| [Instalação sem o Central](docs/pt-BR/setup-without-central.md) | Home Assistant, um broker existente ou configuração por USB |
 | [Cajuí Central](docs/pt-BR/central.md) | Painel, histórico, cadastro e estado dos dispositivos |
 | [MQTT e integrações](docs/pt-BR/mqtt-integrations.md) | Permissões, Home Assistant e descoberta |
 | [Operação](docs/pt-BR/operations.md) | Diagnosticar leituras ausentes, atualizar e recuperar |
