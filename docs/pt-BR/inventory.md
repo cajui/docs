@@ -49,7 +49,7 @@ Referências: [protocolo](https://github.com/cajui/cajui-firmware/blob/de9ddaa60
 | Seletor de redes e recuperação da busca | Implementado | Tentativas de busca limitadas e entrada manual de redes ocultas |
 | Persistência independente do Wi-Fi | Implementado | Salva Wi-Fi verificado antes da configuração MQTT |
 | Recuperação MQTT após tentativas de Wi-Fi | Implementado | Restaura conexões suspensas com tentativas limitadas |
-| Descoberta do broker | Implementado | Descoberta de endereço por mDNS com anúncio na máquina do broker |
+| Descoberta do broker | Implementado | Descoberta de endereço por mDNS com anúncio na máquina do broker; a partir de `47a6a65`, também a busca da porta do broker na sub-rede da receptora |
 | Disponibilidade e estado dos dispositivos | Implementado | Estado MQTT retido e Last Will da receptora |
 | Comandos MQTT de pareamento e revogação | Implementado | Disponíveis a clientes autorizados pelo canal de gestão |
 | MQTT Discovery do Home Assistant | Implementado; validação de integração pendente | Publica definições de entidades suportadas |

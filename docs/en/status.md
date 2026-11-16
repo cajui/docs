@@ -20,10 +20,14 @@ This documentation covers the following source revisions, checked on 2026-10-17:
 Technical reference links target these revisions. Installed images and published releases
 may contain an earlier feature set.
 
-The [installation guides](setup.md) were checked on 2026-11-16 against Central
+The installation guides, [with Central](setup.md) and [without Central](setup-without-central.md),
+and the [MQTT integration](mqtt-integrations.md) and [operations](operations.md) pages
+were checked on 2026-11-16 against Central
 [`05f58ba`](https://github.com/cajui/cajui-central/tree/05f58ba12b6c2542018f9cbc7ee2d913b4e4a27f) and firmware
-[`47a6a65`](https://github.com/cajui/cajui-firmware/tree/47a6a652e788f99d3d6406dae837ba99223fe036),
-which add the receiver's broker search. Published firmware releases do not include it.
+[`47a6a65`](https://github.com/cajui/cajui-firmware/tree/47a6a652e788f99d3d6406dae837ba99223fe036).
+The firmware revision adds the receiver's broker search. The only published firmware
+release, v0.1.0, predates the management channel, pairing from Central, Home Assistant
+Discovery and the broker search, so the guides install firmware built from source.
 
 The main branch includes the Stick Lite/SHT4x target, Wi-Fi scan recovery,
 independent persistence of verified Wi-Fi settings and MQTT recovery improvements.

@@ -40,12 +40,12 @@ connected to the broker.
 
 ## 2. Install the firmware
 
-Install the receiver image on the receiver board and the transmitter image on the
-transmitter board. The [web installer](https://github.com/cajui/cajui-firmware/blob/47a6a652e788f99d3d6406dae837ba99223fe036/docs/updates.md#web-installer-usb)
-installs released Heltec WiFi LoRa 32 V3 images from Chrome or Edge. Published releases
-predate the receiver's broker search used in step 3, and other boards are not included
-in them. For those, [build and install from source](https://github.com/cajui/cajui-firmware/blob/47a6a652e788f99d3d6406dae837ba99223fe036/docs/provisioning.md#build-and-install)
-over USB.
+[Build and install from source](https://github.com/cajui/cajui-firmware/blob/47a6a652e788f99d3d6406dae837ba99223fe036/docs/provisioning.md#build-and-install)
+over USB: the receiver image on the receiver board and the transmitter image on the
+transmitter board, from the firmware's main branch at revision `47a6a65` or later. The
+only published release, v0.1.0, and the web installer that installs it predate the
+management channel Central uses to find receivers and pair transmitters: with that
+release, the receiver never appears in step 3.
 
 Use the new-board installation procedure only for an uninitialized board. Normal updates
 preserve the dedicated storage partition containing enrollment, counters and queued samples.

@@ -39,13 +39,12 @@ conectado ao broker.
 
 ## 2. Instale o firmware
 
-Instale a imagem de receptora na placa receptora e a imagem de transmissor na placa
-transmissora. O [instalador web](https://github.com/cajui/cajui-firmware/blob/47a6a652e788f99d3d6406dae837ba99223fe036/docs/updates.md#web-installer-usb)
-instala as imagens publicadas da Heltec WiFi LoRa 32 V3 pelo Chrome ou pelo Edge. As
-versões publicadas são anteriores à busca do broker pela receptora, usada na etapa 3,
-e não incluem as outras placas. Nesses casos,
-[compile e instale a partir do código-fonte](https://github.com/cajui/cajui-firmware/blob/47a6a652e788f99d3d6406dae837ba99223fe036/docs/provisioning.md#build-and-install)
-por USB.
+[Compile e instale a partir do código-fonte](https://github.com/cajui/cajui-firmware/blob/47a6a652e788f99d3d6406dae837ba99223fe036/docs/provisioning.md#build-and-install)
+por USB: a imagem de receptora na placa receptora e a imagem de transmissor na placa
+transmissora, a partir da branch main do firmware na revisão `47a6a65` ou posterior. A
+única release publicada, a v0.1.0, e o instalador web que a instala são anteriores ao
+canal de gestão que o Central usa para achar receptoras e parear transmissores: com essa
+release, a receptora nunca aparece na etapa 3.
 
 Use o procedimento de instalação em placa nova apenas para uma placa não inicializada.
 Atualizações normais preservam a partição dedicada que contém vínculos, contadores e

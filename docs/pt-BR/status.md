@@ -20,10 +20,15 @@ Esta documentação abrange as seguintes revisões de código, verificadas em 17
 Os links de referência técnica apontam para essas revisões. Imagens instaladas e
 releases publicadas podem conter um conjunto anterior de funcionalidades.
 
-Os [guias de instalação](setup.md) foram verificados em 16/11/2026 com o Central
+Os guias de instalação, [com o Central](setup.md) e [sem o Central](setup-without-central.md),
+e as páginas de [integrações MQTT](mqtt-integrations.md) e de [operação](operations.md)
+foram verificados em 16/11/2026 com o Central
 [`05f58ba`](https://github.com/cajui/cajui-central/tree/05f58ba12b6c2542018f9cbc7ee2d913b4e4a27f) e o firmware
-[`47a6a65`](https://github.com/cajui/cajui-firmware/tree/47a6a652e788f99d3d6406dae837ba99223fe036),
-que acrescentam a busca do broker pela receptora. As releases publicadas do firmware não a incluem.
+[`47a6a65`](https://github.com/cajui/cajui-firmware/tree/47a6a652e788f99d3d6406dae837ba99223fe036).
+A revisão do firmware acrescenta a busca do broker pela receptora. A única release
+publicada do firmware, a v0.1.0, é anterior ao canal de gestão, ao pareamento pelo
+Central, ao Discovery do Home Assistant e à busca do broker; por isso os guias instalam
+o firmware compilado a partir do código-fonte.
 
 A branch main inclui o alvo Stick Lite/SHT4x, recuperação da busca
 Wi-Fi, persistência independente das configurações de Wi-Fi verificadas e melhorias na
