@@ -27,13 +27,15 @@ Follow step 2 of the [installation guide](setup.md#2-install-the-firmware).
 1. Hold the receiver's PRG button for three seconds to open setup.
 2. Join its temporary Wi-Fi network and open `http://192.168.4.1`.
 3. Select a 2.4 GHz network or enter a hidden SSID and its credentials.
-4. In the **MQTT broker** section, choose a broker found on the network or enter its
-   address, then the port and the producer credentials.
-5. Confirm both Wi-Fi and broker connection status.
+4. Once Wi-Fi connects, tap **Refresh** until the search ends, which takes up to about a
+   minute. In the **MQTT broker** section, choose a broker found on the network or enter
+   its address, then the port and the producer credentials, and save.
+5. Tap **Refresh** until the status shows Wi-Fi connected and **Broker: online**.
 
 The broker address must be reachable from the receiver's network. An internal container
-hostname may only resolve inside Docker. The receiver lists brokers that answer on its
-own subnet, and brokers announced through mDNS.
+hostname may only resolve inside Docker. The receiver lists brokers announced through
+mDNS and brokers that answer on port 1883, or on the port already entered, in its own
+subnet; see the notes in [installation](setup.md#3-add-the-receiver).
 
 **Expected result:** the page reports **Broker: online**.
 

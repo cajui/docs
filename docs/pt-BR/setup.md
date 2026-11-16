@@ -14,8 +14,9 @@ a [instalação sem o Central](setup-without-central.md).
 - Uma placa transmissora e um sensor suportados.
 - Uma placa receptora suportada e antenas LoRa adequadas para ambos os dispositivos.
 - Fontes de alimentação apropriadas para as placas e os sensores.
-- Uma rede Wi-Fi de 2,4 GHz. A receptora e o computador do Central precisam estar na
-  mesma rede: a receptora procura o broker apenas na própria sub-rede.
+- Uma rede Wi-Fi de 2,4 GHz com senha de pelo menos oito caracteres; redes abertas não
+  são suportadas. A receptora e o computador do Central precisam estar na mesma rede: a
+  receptora procura o broker apenas na própria sub-rede.
 - Um computador com Docker que fique ligado para receber e guardar as leituras.
 - Um celular ou outro computador com Wi-Fi, para abrir a página de configuração da receptora.
 - Um cabo USB com transmissão de dados para instalar o firmware.
@@ -60,36 +61,46 @@ No Central, abra **Equipamentos → Receptores → Adicionar receptor** e siga a
 
 1. **Conectar ao receptor.** Segure o botão PRG da receptora por três segundos, conecte
    o celular à rede Wi-Fi `Cajui-XXXX` dela e abra `http://192.168.4.1`. Escolha sua rede
-   de 2,4 GHz e salve a senha. A página informa o Wi-Fi conectado e as configurações salvas.
-2. **Dados de conexão.** Na seção **MQTT broker** da página, escolha o broker encontrado
-   na rede. Se aparecer mais de um, use o do computador do Central.
-   Preencha o usuário e a senha mostrados pelo assistente e salve. A página informa
+   de 2,4 GHz e salve a senha. Toque em **Refresh** até o estado mostrar
+   **Wi-Fi: connected** e **Wi-Fi settings: saved**.
+2. **Dados de conexão.** Quando o Wi-Fi conecta, a receptora procura brokers na rede, o
+   que leva até cerca de um minuto. Toque em **Refresh** até a seção **MQTT broker** da
+   página listar um broker e escolha-o; se aparecer mais de um, use o do computador do
+   Central. **Search again** repete a busca. Preencha o usuário e a senha mostrados pelo
+   assistente e salve; depois toque em **Refresh** até o estado mostrar
    **Broker: online**.
 3. **Encontrar receptor.** O assistente lista a receptora quando ela se conecta. Confirme-a.
 
 **Resultado esperado:** a receptora aparece em **Equipamentos → Receptores** como conectada.
 
-Antes de depender da página de configuração, saiba como ela funciona:
+Antes de depender da página de configuração, saiba como ela funciona; os detalhes estão
+na referência da
+[página de configuração da receptora](https://github.com/cajui/cajui-firmware/blob/47a6a652e788f99d3d6406dae837ba99223fe036/docs/radio-applications.md#receiver-setup-page)
+no firmware:
 
-- A página responde apenas na rede Wi-Fi da própria receptora, que o botão PRG abre por
-  até 30 minutos. Trocar o broker depois exige alguém ao lado da receptora, ou USB.
+- A página responde apenas na rede Wi-Fi da própria receptora, que o botão PRG abre.
+  Ela fecha 30 minutos depois de aberta, depois de dez minutos sem uso ou quando o PRG
+  é segurado de novo. Configurar outro broker depois exige acesso físico à receptora:
+  o botão PRG ou USB.
 - A rede de configuração fica aberta enquanto está ativa; consulte
   [rádio e segurança](radio-security.md).
 - Escolher outra rede Wi-Fi apaga as configurações do broker salvas, para que a senha
   nunca seja enviada a um broker numa rede desconhecida. Escolha o broker e informe as
   credenciais de novo.
-- A lista mostra os brokers que respondem na porta 1883 da sub-rede da receptora, sem
-  depender do anúncio por mDNS do Central. Firmware mais antigo lista só os brokers
-  anunciados por mDNS. Se o broker não aparecer, informe o endereço do computador na
-  rede local.
+- A lista mostra os brokers anunciados por mDNS e os que respondem na porta 1883, ou na
+  porta já informada, nos endereços da sub-rede da receptora; numa rede com mais de 254
+  endereços, a busca cobre só o bloco /24 em volta da receptora. Se o broker não
+  aparecer, informe o endereço do computador na rede local.
 
-Se a receptora não aparecer, as linhas de estado da página separam Wi-Fi e broker:
+Se a receptora não aparecer, as linhas de estado da página separam Wi-Fi e broker. A
+página da receptora é em inglês:
 
 | A página da receptora mostra | Confira |
 | --- | --- |
-| Wi-Fi sem conseguir conectar | Nome e senha da rede; a rede precisa oferecer 2,4 GHz |
-| Wi-Fi conectado, broker offline | Endereço, porta, usuário e senha; receptora e Central na mesma rede. No computador do Central, `docker compose logs broker` mostra se as tentativas de conexão chegam ao broker |
-| Broker online, mas o assistente não lista nada | O assistente lista as receptoras que se conectam depois de ele abrir. Uma que já estava conectada aparece em **Equipamentos → Receptores** |
+| **Wi-Fi: could not connect** | Nome e senha da rede, com pelo menos oito caracteres; a rede precisa oferecer 2,4 GHz |
+| Nenhum broker na seção **MQTT broker** depois da busca | Receptora e Central na mesma sub-rede, e o broker na porta 1883. Se não, informe o endereço do computador na rede local e a porta |
+| **Wi-Fi: connected** com **Broker: offline** | Endereço, porta, usuário e senha; receptora e Central na mesma rede. No computador do Central, `docker compose logs broker` mostra se as tentativas de conexão chegam ao broker |
+| **Broker: online**, mas o assistente não lista nada | O assistente lista as receptoras que se conectam depois de ele abrir. Uma que já estava conectada aparece em **Equipamentos → Receptores** |
 
 ## 4. Pareie um transmissor
 

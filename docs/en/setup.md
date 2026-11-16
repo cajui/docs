@@ -14,8 +14,9 @@ without Central, an existing broker or USB configuration, see
 - A supported transmitter board and sensor.
 - A supported receiver board and suitable LoRa antennas for both devices.
 - Power supplies appropriate for the boards and sensors.
-- A 2.4 GHz Wi-Fi network. The receiver and the computer running Central must be on the
-  same network: the receiver looks for the broker only on its own subnet.
+- A 2.4 GHz Wi-Fi network with a password of at least eight characters; open networks
+  are not supported. The receiver and the computer running Central must be on the same
+  network: the receiver looks for the broker only on its own subnet.
 - A computer with Docker that stays on to receive and store readings.
 - A phone or another computer with Wi-Fi, to open the receiver's setup page.
 - A data-capable USB cable to install the firmware.
@@ -58,38 +59,45 @@ transmitters starts listening; a transmitter without enrollment waits for pairin
 
 In Central, open **Equipment → Receivers → Add receiver** and follow its three steps.
 
-1. **Connect to the receiver.** Hold the receiver's PRG button for three seconds, join
+1. **Connect to receiver.** Hold the receiver's PRG button for three seconds, join
    its `Cajui-XXXX` Wi-Fi network from the phone and open `http://192.168.4.1`. Choose
-   your 2.4 GHz network and save its password. The page reports Wi-Fi connected and the
-   settings saved.
-2. **Connection details.** In the page's **MQTT broker** section, choose the broker
-   found on the network. If more than one appears, use the computer running
-   Central. Enter the username and password shown by the assistant and save. The page
-   reports **Broker: online**.
-3. **Find the receiver.** The assistant lists the receiver when it connects. Confirm it.
+   your 2.4 GHz network and save its password. Tap **Refresh** until the status shows
+   **Wi-Fi: connected** and **Wi-Fi settings: saved**.
+2. **Connection details.** Once Wi-Fi connects, the receiver searches the network for
+   brokers, which takes up to about a minute. Tap **Refresh** until the page's
+   **MQTT broker** section lists a broker, and choose it; if more than one appears, use
+   the computer running Central. **Search again** repeats the search. Enter the username
+   and the password shown by the assistant and save, then tap **Refresh** until the
+   status shows **Broker: online**.
+3. **Find receiver.** The assistant lists the receiver when it connects. Confirm it.
 
 **Expected result:** the receiver appears in **Equipment → Receivers** as online.
 
-Before relying on the setup page, note how it works:
+Before relying on the setup page, note how it works; the firmware's
+[receiver setup page](https://github.com/cajui/cajui-firmware/blob/47a6a652e788f99d3d6406dae837ba99223fe036/docs/radio-applications.md#receiver-setup-page)
+reference has the details:
 
-- The page answers only on the receiver's own Wi-Fi network, which opens with the PRG
-  button for up to 30 minutes. Changing the broker later requires someone next to the
-  receiver, or USB.
+- The page answers only on the receiver's own Wi-Fi network, which the PRG button opens.
+  It closes 30 minutes after opening, after ten minutes without use, or when PRG is held
+  again. Configuring another broker later requires physical access to the receiver: the
+  PRG button or USB.
 - The setup network is open while active; see [radio and security](radio-security.md).
 - Choosing another Wi-Fi network clears the saved broker settings, so that the password
   is never sent to a broker on an unknown network. Choose the broker and enter the
   credentials again.
-- The list shows brokers that answer on port 1883 of the receiver's subnet, without
-  Central's mDNS announcement helper. Older firmware lists only brokers announced through
-  mDNS. If the broker is not listed, enter the computer's LAN address.
+- The list shows brokers announced through mDNS and brokers that answer on port 1883, or
+  on the port already entered, at the addresses of the receiver's subnet; on a network
+  larger than 254 addresses, only the /24 block around the receiver is searched. If the
+  broker is not listed, enter the computer's LAN address.
 
 If the receiver does not appear, the page's status lines tell Wi-Fi and broker apart:
 
 | The receiver page shows | Check |
 | --- | --- |
-| Wi-Fi could not connect | Network name and password; the network must offer 2.4 GHz |
-| Wi-Fi connected, broker offline | Address, port, username and password; receiver and Central on the same network. On the Central computer, `docker compose logs broker` shows whether connection attempts reach the broker |
-| Broker online, but the assistant lists nothing | The assistant lists receivers that connect after it opened. One already online appears in **Equipment → Receivers** |
+| **Wi-Fi: could not connect** | Network name and password, of at least eight characters; the network must offer 2.4 GHz |
+| No broker in the **MQTT broker** section after the search | Receiver and Central on the same subnet, and the broker on port 1883. Otherwise enter the computer's LAN address and port |
+| **Wi-Fi: connected** with **Broker: offline** | Address, port, username and password; receiver and Central on the same network. On the Central computer, `docker compose logs broker` shows whether connection attempts reach the broker |
+| **Broker: online**, but the assistant lists nothing | The assistant lists receivers that connect after it opened. One already online appears in **Equipment → Receivers** |
 
 ## 4. Pair a transmitter
 
