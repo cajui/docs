@@ -59,7 +59,10 @@ transitions are specified in the [pairing protocol](https://github.com/cajui/caj
 
 The setup access point permits nearby clients to join while it is enabled. Operators
 should perform configuration and pairing in a controlled environment. The receiver's
-MQTT connection requires a trusted local network until TLS support is available.
+MQTT connection requires a trusted local network until TLS support is available. From
+firmware revision `47a6a65`, a receiver that loses its broker sends the stored password
+to any host on its subnet that answers on the broker port, so every computer on that
+network must be trusted; see [broker discovery](mqtt-integrations.md#broker-discovery).
 
 The protocol has not undergone an independent security audit. Preserve enrollment and
 counter records during updates. Revocation invalidates a radio binding; removing a

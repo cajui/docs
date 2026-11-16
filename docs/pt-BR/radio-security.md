@@ -61,7 +61,10 @@ e as transições de estado estão definidos no [protocolo de pareamento](https:
 O ponto de acesso de configuração permite que clientes próximos entrem enquanto está
 habilitado. A configuração e o pareamento devem ser realizados em ambiente controlado.
 A conexão MQTT da receptora exige uma rede local confiável enquanto o suporte a TLS
-não estiver disponível.
+não estiver disponível. A partir da revisão `47a6a65` do firmware, uma receptora que
+perde o broker envia a senha salva a qualquer máquina da sub-rede que responda na porta
+do broker. Por isso, todos os computadores dessa rede precisam ser confiáveis; consulte a
+[descoberta do broker](mqtt-integrations.md#descoberta-do-broker).
 
 O protocolo não passou por auditoria independente de segurança. Preserve os registros
 de vínculo e de contadores durante atualizações. A revogação invalida um vínculo de

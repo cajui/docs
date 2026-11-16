@@ -27,11 +27,15 @@ can publish telemetry but disables Discovery publication.
 ## Broker discovery
 
 The receiver's setup page lists brokers found in two ways: an mDNS `_mqtt._tcp`
-announcement and, from firmware revision `47a6a65`, a search of the broker port on the
-addresses of its own subnet. Discovery supplies the broker address and port;
-authentication requires separately configured credentials. In operation, a receiver
-that loses its broker for two minutes searches its subnet again with the stored
-credentials; see [forwarding to MQTT](https://github.com/cajui/cajui-firmware/blob/47a6a652e788f99d3d6406dae837ba99223fe036/docs/radio-applications.md#forwarding-to-mqtt).
+announcement and, from firmware revision
+[`47a6a65`](https://github.com/cajui/cajui-firmware/tree/47a6a652e788f99d3d6406dae837ba99223fe036),
+a search of the broker port on the addresses of its own subnet. Discovery supplies the
+broker address and port; authentication requires separately configured credentials. In
+operation, a receiver that loses its broker for two minutes searches its subnet again
+with the stored credentials; see [forwarding to MQTT](https://github.com/cajui/cajui-firmware/blob/47a6a652e788f99d3d6406dae837ba99223fe036/docs/radio-applications.md#forwarding-to-mqtt).
+That search sends the stored password to any host on the subnet that answers on the
+broker port and requires a password, so the trusted-network requirement in
+[radio and security](radio-security.md) covers every computer on the receiver's network.
 
 A broker on another subnet is not found by the address search. For mDNS, the broker
 host must advertise the service on a network reachable by the receiver; on Docker
