@@ -47,10 +47,15 @@ transmissora, a partir da branch main do firmware na revisão `47a6a65` ou poste
 canal de gestão que o Central usa para achar receptoras e parear transmissores: com essa
 release, a receptora nunca aparece na etapa 3.
 
-Use o procedimento de instalação em placa nova apenas para uma placa não inicializada.
-Atualizações normais preservam a partição dedicada que contém vínculos, contadores e
-amostras na fila. Identifique os dispositivos por ID estável; os nomes das portas
-seriais podem mudar após uma reconexão.
+Antes da primeira gravação numa placa de fábrica, apague a partição dedicada `cajui`
+com o `erase_region` do esptool, no endereço e no tamanho do
+[layout de partições](https://github.com/cajui/cajui-firmware/blob/47a6a652e788f99d3d6406dae837ba99223fe036/docs/persistence.md#partition-layout)
+do firmware, para que restos do firmware de fábrica não sejam lidos como armazenamento
+corrompido. A [instalação em placa nova](https://github.com/cajui/cajui-firmware/blob/47a6a652e788f99d3d6406dae837ba99223fe036/docs/updates.md#web-installer-usb)
+do instalador web faz o mesmo; a gravação a partir do código-fonte não faz. Nunca a
+apague numa placa já vinculada: a partição guarda as chaves de vínculo, os contadores e
+as amostras na fila, e as atualizações normais a preservam. Identifique os dispositivos
+por ID estável; os nomes das portas seriais podem mudar após uma reconexão.
 
 **Resultado esperado:** a instalação termina sem erros. Uma receptora sem transmissores
 começa a escutar; um transmissor sem vínculo aguarda o pareamento.

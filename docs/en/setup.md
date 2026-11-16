@@ -48,9 +48,16 @@ only published release, v0.1.0, and the web installer that installs it predate t
 management channel Central uses to find receivers and pair transmitters: with that
 release, the receiver never appears in step 3.
 
-Use the new-board installation procedure only for an uninitialized board. Normal updates
-preserve the dedicated storage partition containing enrollment, counters and queued samples.
-Identify devices by stable ID; serial-port names can change after reconnection.
+Before the first upload to a factory board, erase its dedicated `cajui` storage
+partition with esptool's `erase_region`, at the offset and size in the firmware's
+[partition layout](https://github.com/cajui/cajui-firmware/blob/47a6a652e788f99d3d6406dae837ba99223fe036/docs/persistence.md#partition-layout),
+so that leftovers of the firmware the board shipped with are not read as corrupt storage.
+The web installer's
+[new-board installation](https://github.com/cajui/cajui-firmware/blob/47a6a652e788f99d3d6406dae837ba99223fe036/docs/updates.md#web-installer-usb)
+does the same; the source upload does not. Never erase it on an enrolled board: the
+partition holds enrollment keys, counters and queued samples, and normal updates
+preserve it. Identify devices by stable ID; serial-port names can change after
+reconnection.
 
 **Expected result:** the installation finishes without errors. A receiver without
 transmitters starts listening; a transmitter without enrollment waits for pairing.
